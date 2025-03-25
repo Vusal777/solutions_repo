@@ -10,9 +10,9 @@ Projectile motion follows Newton’s equations. We break the motion into **horiz
    x = v_0 \cos(\theta) t
    $$)
 2. **Vertical motion (accelerated motion due to gravity):**  
-   $$
+   $$(
    y = v_0 \sin(\theta) t - \frac{1}{2} g t^2
-   $$
+   $$)
 
 ### **Time of Flight**  
 The projectile reaches the ground when ( y = 0 \), solving for \( t \):
