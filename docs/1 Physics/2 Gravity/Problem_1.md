@@ -114,7 +114,7 @@ plt.show()
 
 ### Results  
 
-This script generates a graph demonstrating that $( T^2 $) and $( r^3 $) are linearly related, verifying Kepler’s Third Law computationally.  
+This script generates a graph demonstrating that $(T^2$) and $(r^3$) are linearly related, verifying Kepler’s Third Law computationally.  
 
 ## Extensions to Elliptical Orbits  
 
