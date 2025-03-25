@@ -1,7 +1,3 @@
-Here’s the **full** result, including a complete theoretical explanation, implementation, and a discussion of real-world applications.
-
----
-
 # **Investigating the Range as a Function of the Angle of Projection**  
 
 ## **1. Theoretical Foundation**  
@@ -49,9 +45,9 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 $$
 
 ### **Key Observations:**
-- **Maximum Range:** Achieved at \( \theta = 45^\circ \).
-- **Symmetry:** The range function is symmetric around \( 45^\circ \) (i.e., \( R(30^\circ) = R(60^\circ) \)).
-- **Velocity Dependence:** Increasing \( v_0 \) increases the range.
+- **Maximum Range:** Achieved at $$( \theta = 45^\circ $$).
+- **Symmetry:** The range function is symmetric around $$( 45^\circ $$) (i.e., $$( R(30^\circ) = R(60^\circ) $$)).
+- **Velocity Dependence:** Increasing $$( v_0 $$) increases the range.
 
 ---
 
