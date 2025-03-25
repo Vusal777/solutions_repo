@@ -89,7 +89,7 @@ A spacecraft must exceed **42.1 km/s** to completely leave the Solar System, con
 
 ## **Mathematical Analysis and Simulation**  
 
-To visualize escape and orbital velocities for different celestial bodies, we compute $v_1$ and $v_2 $ for **Earth, Mars, and Jupiter**:  
+To visualize escape and orbital velocities for different celestial bodies, we compute $v_1$ and $v_2$ for **Earth, Mars, and Jupiter**:  
 
 | Body     | Mass ($10^{24}$ kg) | Radius (km) | $v_1$ (km/s) | $v_2$ (km/s) |
 |----------|-----------------|------------|-------------|-------------|
