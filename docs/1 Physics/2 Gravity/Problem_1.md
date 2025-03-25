@@ -118,7 +118,7 @@ This script generates a graph demonstrating that $(T^2$) and $(r^3$) are linearl
 
 ## Extensions to Elliptical Orbits  
 
-While we derived the relationship for **circular orbits**, Kepler’s Third Law holds for **elliptical orbits** as well. The major difference is that for an ellipse, $( r $) is replaced by the **semi-major axis (a)**, yielding:  
+While we derived the relationship for **circular orbits**, Kepler’s Third Law holds for **elliptical orbits** as well. The major difference is that for an ellipse, $(r$) is replaced by the **semi-major axis (a)**, yielding:  
 
 $$
 T^2 = \frac{4\pi^2}{G M} a^3
