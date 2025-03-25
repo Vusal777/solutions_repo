@@ -32,7 +32,7 @@ t = \frac{2 v_0 \sin(\theta)}{g}
 $$
 
 ### **Range of the Projectile**
-The range \( R \) is the horizontal distance covered in time \( t \):
+The range ( R ) is the horizontal distance covered in time \( t \):
 
 $$
 R = v_0 \cos(\theta) \times T
