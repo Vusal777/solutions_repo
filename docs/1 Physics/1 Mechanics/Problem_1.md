@@ -6,9 +6,9 @@ Projectile motion follows Newton’s equations. We break the motion into **horiz
 
 ### **Equations of Motion**
 1. **Horizontal motion (constant velocity):**  
-   $$
+   $$(
    x = v_0 \cos(\theta) t
-   $$
+   $$)
 2. **Vertical motion (accelerated motion due to gravity):**  
    $$
    y = v_0 \sin(\theta) t - \frac{1}{2} g t^2
@@ -38,7 +38,7 @@ $$
 R = v_0 \cos(\theta) \times T
 $$
 
-Substituting \( T = \frac{2 v_0 \sin(\theta)}{g} \):
+Substituting $$( T = \frac{2 v_0 \sin(\theta)}{g} $$\):
 
 $$
 R = \frac{v_0^2 \sin(2\theta)}{g}
