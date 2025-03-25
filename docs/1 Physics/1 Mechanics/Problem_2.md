@@ -10,7 +10,7 @@ $$
 $$
 
 where:
-- $ \theta $ is the angular displacement,
+- ${ \theta }$ is the angular displacement,
 -  <b><i>b</i></b> is the damping coefficient,
 - <b><i>c</i></b> represents the gravitational restoring force (\( g/L \)),
 - <i><b>A</b></i> is the amplitude of the external driving force,
