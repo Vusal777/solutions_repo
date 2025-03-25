@@ -26,7 +26,7 @@ $$
 which has a well-known analytical solution for periodic motion. However, for larger angles, **chaotic motion** can arise.
 
 ### **Resonance Condition**
-When the driving frequency $$ \omega $$ is close to the **natural frequency** of the pendulum:
+When the driving frequency $$ {\omega} $$ is close to the **natural frequency** of the pendulum:
 
 $$
 \omega_0 = \sqrt{c}
