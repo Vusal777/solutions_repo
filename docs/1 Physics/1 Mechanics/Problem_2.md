@@ -11,7 +11,7 @@ $$
 
 where:
 - ${ \theta }$ is the angular displacement,
--  <b><i>b</i></b> is the damping coefficient,
+-  <i>b</i> is the damping coefficient,
 - <b><i>c</i></b> represents the gravitational restoring force (\( <b> g/L </b> \)),
 - <i><b>A</b></i> is the amplitude of the external driving force,
 - <b> ω </b> is the driving frequency.
