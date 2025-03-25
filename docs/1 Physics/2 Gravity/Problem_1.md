@@ -82,7 +82,7 @@ $$
 \left(\frac{T_J}{T_E}\right)^2 = \left(\frac{r_J}{r_E}\right)^3
 $$
 
-Solving for $( r_J $), we obtain approximately **5.2 AU** (astronomical units).  
+Solving for $r_J$, we obtain approximately **5.2 AU** (astronomical units).  
 
 ### 3. **Satellite Orbits**  
 Artificial satellites obey the same relationship. The International Space Station (ISS), for example, orbits Earth at **~420 km** with a period of **~92 minutes**, consistent with Kepler’s law.  
