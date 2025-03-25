@@ -5,12 +5,12 @@
 
 The forced damped pendulum is governed by the nonlinear differential equation:
 
-$$[
+$$
 \frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + c \sin\theta = A \cos(\omega t)
-$$]
+$$
 
 where:
-- $\theta $ is the angular displacement,
+- $ \theta $ is the angular displacement,
 -  <b><i>b</i></b> is the damping coefficient,
 - <b><i>c</i></b> represents the gravitational restoring force (\( g/L \)),
 - <i><b>A</b></i> is the amplitude of the external driving force,
