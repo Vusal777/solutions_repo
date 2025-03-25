@@ -53,7 +53,7 @@ $$
 v_2 = \sqrt{\frac{2GM}{r}}
 $$
 
-Since $ v_2 = \sqrt{2} v_1 $, escape velocity is **about 41% higher than orbital velocity**.  
+Since $v_3 = \sqrt{2} v_1$, escape velocity is **about 41% higher than orbital velocity**.  
 
 For Earth:  
 
