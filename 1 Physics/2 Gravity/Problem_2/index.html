@@ -172,6 +172,159 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h1 id="escape-velocities-and-cosmic-velocities"><strong>Escape Velocities and Cosmic Velocities</strong></h1>
+<h2 id="motivation"><strong>Motivation</strong></h2>
+<p>Escape velocity is a fundamental concept in astrophysics and space exploration. It defines the minimum speed an object must reach to break free from a celestial body's gravitational pull. Expanding on this idea, the <strong>first, second, and third cosmic velocities</strong> describe different thresholds for achieving stable orbits, escaping planetary gravity, and even leaving a star system.  </p>
+<p>These principles are essential for satellite launches, interplanetary missions, and theoretical interstellar travel. Understanding these velocities allows scientists to design efficient spacecraft trajectories, predict orbital behavior, and plan missions beyond Earth.  </p>
+<hr/>
+<h2 id="definitions-of-cosmic-velocities"><strong>Definitions of Cosmic Velocities</strong></h2>
+<h3 id="1-first-cosmic-velocity-orbital-velocity"><strong>1. First Cosmic Velocity (Orbital Velocity)</strong></h3>
+<p>The <strong>first cosmic velocity</strong> (also called orbital velocity) is the <strong>minimum speed needed for an object to stay in a stable circular orbit around a planet</strong> without propulsion. It is derived from the balance of gravitational attraction and centripetal force:  </p>
+<div class="arithmatex">\[
+v_1 = \sqrt{\frac{GM}{r}}
+\]</div>
+<p>where:<br/>
+- <span class="arithmatex">\(G\)</span> = gravitational constant (<span class="arithmatex">\(6.674 \times 10^{-11} \, \text{m}^3\text{kg}^{-1}\text{s}^{-2}\)</span>),<br/>
+- <span class="arithmatex">\(M\)</span> = mass of the celestial body,<br/>
+- <span class="arithmatex">\(r\)</span> = orbital radius from the center of the celestial body.  </p>
+<p>For Earth, assuming a low-altitude orbit (<span class="arithmatex">\(r \approx R_E\)</span>):  </p>
+<div class="arithmatex">\[
+v_1 = \sqrt{\frac{6.674 \times 10^{-11} \times 5.972 \times 10^{24}}{6.371 \times 10^6}}
+\]</div>
+<div class="arithmatex">\[
+v_1 \approx 7.91 \text{ km/s}
+\]</div>
+<p>This means a satellite must travel at <strong>7.91 km/s</strong> to maintain a low Earth orbit.  </p>
+<hr/>
+<h3 id="2-second-cosmic-velocity-escape-velocity"><strong>2. Second Cosmic Velocity (Escape Velocity)</strong></h3>
+<p>The <strong>second cosmic velocity</strong> (escape velocity) is the <strong>minimum speed needed to completely escape a planet's gravitational influence</strong> without additional propulsion. It is derived from energy conservation:  </p>
+<div class="arithmatex">\[
+\frac{1}{2} m v^2 - \frac{GMm}{r} = 0
+\]</div>
+<p>Solving for <span class="arithmatex">\( v \)</span>:  </p>
+<div class="arithmatex">\[
+v_2 = \sqrt{\frac{2GM}{r}}
+\]</div>
+<p>Since $v_2 = \sqrt{2} v_1 $, escape velocity is <strong>about 41% higher than orbital velocity</strong>.  </p>
+<p>For Earth:  </p>
+<div class="arithmatex">\[
+v_2 = \sqrt{2} \times 7.91 = 11.2 \text{ km/s}
+\]</div>
+<p>A spacecraft must reach <strong>11.2 km/s</strong> to leave Earth's gravitational field.  </p>
+<hr/>
+<h3 id="3-third-cosmic-velocity-solar-system-escape-velocity"><strong>3. Third Cosmic Velocity (Solar System Escape Velocity)</strong></h3>
+<p>The <strong>third cosmic velocity</strong> is the <strong>minimum speed required to escape the Sun's gravitational influence from Earth’s orbit</strong>. It is calculated using the escape velocity formula, but with the Sun’s mass and Earth's orbital distance (<span class="arithmatex">\(r \approx 1\)</span> AU):  </p>
+<div class="arithmatex">\[
+v_3 = \sqrt{\frac{2GM_{\odot}}{r_{\text{Earth}}}}
+\]</div>
+<p>For the Sun:  </p>
+<div class="arithmatex">\[
+v_3 \approx 42.1 \text{ km/s}
+\]</div>
+<p>A spacecraft must exceed <strong>42.1 km/s</strong> to completely leave the Solar System, considering Earth's initial orbital speed ($ v_{\text{Earth}} = 29.78 $ km/s). Thus, an additional <strong>12.3 km/s</strong> is needed beyond Earth's motion.  </p>
+<p><strong>Examples of Spacecraft Achieving Third Cosmic Velocity:</strong><br/>
+- Voyager 1: <strong>~17 km/s</strong> (relative to Sun) – <strong>fastest human-made object</strong>, currently in interstellar space.<br/>
+- New Horizons: <strong>~16.26 km/s</strong>, heading towards the Kuiper Belt.  </p>
+<hr/>
+<h2 id="mathematical-analysis-and-simulation"><strong>Mathematical Analysis and Simulation</strong></h2>
+<p>To visualize escape and orbital velocities for different celestial bodies, we compute <span class="arithmatex">\(v_1\)</span> and $v_2 $ for <strong>Earth, Mars, and Jupiter</strong>:  </p>
+<table>
+<thead>
+<tr>
+<th>Body</th>
+<th>Mass (<span class="arithmatex">\(10^{24}\)</span> kg)</th>
+<th>Radius (km)</th>
+<th><span class="arithmatex">\(v_1\)</span> (km/s)</th>
+<th><span class="arithmatex">\(v_2\)</span> (km/s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Earth</td>
+<td>5.972</td>
+<td>6,371</td>
+<td>7.91</td>
+<td>11.2</td>
+</tr>
+<tr>
+<td>Mars</td>
+<td>0.6417</td>
+<td>3,390</td>
+<td>3.55</td>
+<td>5.03</td>
+</tr>
+<tr>
+<td>Jupiter</td>
+<td>1898</td>
+<td>69,911</td>
+<td>42.1</td>
+<td>59.5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-code-for-computation-and-visualization"><strong>Python Code for Computation and Visualization</strong></h3>
+<p>The following Python script calculates and plots escape velocities for different celestial bodies:  </p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.67430e-11  # Gravitational constant (m^3 kg^-1 s^-2)
+bodies = {
+    "Earth": {"M": 5.972e24, "R": 6.371e6},
+    "Mars": {"M": 0.6417e24, "R": 3.39e6},
+    "Jupiter": {"M": 1.898e27, "R": 6.9911e7},
+}
+
+# Compute velocities
+for body, data in bodies.items():
+    M, R = data["M"], data["R"]
+    v1 = np.sqrt(G * M / R) / 1000  # Convert to km/s
+    v2 = np.sqrt(2 * G * M / R) / 1000
+    data["v1"], data["v2"] = v1, v2
+
+# Plot results
+labels = list(bodies.keys())
+v1_vals = [bodies[b]["v1"] for b in labels]
+v2_vals = [bodies[b]["v2"] for b in labels]
+
+x = np.arange(len(labels))
+width = 0.35
+
+fig, ax = plt.subplots(figsize=(8,6))
+ax.bar(x - width/2, v1_vals, width, label="Orbital Velocity (km/s)")
+ax.bar(x + width/2, v2_vals, width, label="Escape Velocity (km/s)")
+
+ax.set_xlabel("Celestial Body")
+ax.set_ylabel("Velocity (km/s)")
+ax.set_title("Orbital and Escape Velocities for Different Celestial Bodies")
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
+ax.grid(True)
+
+plt.show()
+</code></pre>
+<h3 id="results"><strong>Results</strong></h3>
+<p>The bar chart visually compares orbital and escape velocities for Earth, Mars, and Jupiter. The trend shows that:<br/>
+- <strong>Jupiter has the highest escape velocity</strong> due to its massive gravitational pull.<br/>
+- <strong>Mars has the lowest escape velocity</strong>, making it easier for spacecraft to leave its surface.  </p>
+<hr/>
+<h2 id="importance-in-space-exploration"><strong>Importance in Space Exploration</strong></h2>
+<h3 id="1-launching-satellites"><strong>1. Launching Satellites</strong></h3>
+<p>Satellites require <strong>first cosmic velocity</strong> to remain in orbit. Too slow, and they fall back; too fast, and they escape Earth’s gravity.  </p>
+<h3 id="2-interplanetary-travel"><strong>2. Interplanetary Travel</strong></h3>
+<ul>
+<li><strong>Missions to Mars (e.g., Perseverance rover)</strong> require overcoming <strong>Earth’s escape velocity</strong> and matching Mars' orbital speed.  </li>
+<li><strong>Missions to Jupiter (e.g., Juno probe)</strong> require additional velocity and precise gravity assists.  </li>
+</ul>
+<h3 id="3-interstellar-exploration"><strong>3. Interstellar Exploration</strong></h3>
+<ul>
+<li><strong>Voyager 1 &amp; 2</strong> have exceeded <strong>third cosmic velocity</strong>, now traveling beyond the Solar System.  </li>
+<li><strong>Future missions</strong> may use advanced propulsion (ion thrusters, nuclear engines) to achieve speeds beyond <strong>42.1 km/s</strong>.  </li>
+</ul>
+<hr/>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>Understanding <strong>cosmic velocities</strong> is essential for spacecraft design, mission planning, and space exploration. Whether keeping satellites in orbit, escaping Earth's gravity, or reaching interstellar space, these velocity thresholds define the boundaries of our exploration capabilities. With future advancements, humanity may one day surpass even the <strong>third cosmic velocity</strong>, venturing into deep space and beyond. 🚀✨</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
