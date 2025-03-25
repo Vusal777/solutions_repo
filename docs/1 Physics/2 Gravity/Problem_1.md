@@ -128,4 +128,4 @@ This generalization explains the motion of all planets, comets, and even exoplan
 
 ## Conclusion  
 
-Kepler’s Third Law provides a fundamental link between time and space in orbital mechanics. Its ability to describe planetary motions, determine celestial masses, and predict satellite behavior makes it a cornerstone of both classical and modern astronomy. Through theoretical derivation, real-world examples, and computational verification, we see that $( T^2 \propto r^3 $) is not just an equation but a profound insight into the mechanics of the cosmos.
+Kepler’s Third Law provides a fundamental link between time and space in orbital mechanics. Its ability to describe planetary motions, determine celestial masses, and predict satellite behavior makes it a cornerstone of both classical and modern astronomy. Through theoretical derivation, real-world examples, and computational verification, we see that $(T^2 \propto r^3$) is not just an equation but a profound insight into the mechanics of the cosmos.
