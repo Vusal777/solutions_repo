@@ -10,11 +10,11 @@ $$[
 $$]
 
 where:
-- \( \theta \) is the angular displacement,
-- \( b \) is the damping coefficient,
-- \( c \) represents the gravitational restoring force (\( g/L \)),
-- \( A \) is the amplitude of the external driving force,
-- \( \omega \) is the driving frequency.
+- $\theta $ is the angular displacement,
+-  <b><i>b</i></b> is the damping coefficient,
+- <b><i>c</i></b> represents the gravitational restoring force (\( g/L \)),
+- <i><b>A</b></i> is the amplitude of the external driving force,
+- \ is the driving frequency.
 
 ### **Small-Angle Approximation**
 For small angles (\( \theta \approx \sin\theta \)), the equation reduces to a **driven damped harmonic oscillator**:
