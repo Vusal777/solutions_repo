@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 2 - Physics and Mathematics</title>
+<title>Investigating the Dynamics of a Forced Damped Pendulum - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 2";
+        var mkdocs_page_name = "Investigating the Dynamics of a Forced Damped Pendulum";
         var mkdocs_page_input_path = "1 Physics/1 Mechanics/Problem_2.md";
         var mkdocs_page_url = null;
       </script>
@@ -48,8 +48,38 @@
 <ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Investigating the Range as a Function of the Angle of Projection</a>
 </li>
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Investigating the Dynamics of a Forced Damped Pendulum</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#resonance-condition">Resonance Condition</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-python-implementation">2. Python Implementation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-results-and-graphical-analysis">3. Results and Graphical Analysis</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#time-evolution-of-theta">Time Evolution of \( \theta \)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#phase-space-analysis">Phase Space Analysis</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-practical-applications">4. Practical Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#5-limitations-possible-extensions">5. Limitations &amp; Possible Extensions</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">Limitations:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#extensions">Extensions:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#final-thoughts">Final Thoughts</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +193,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">1 Mechanics</li>
-<li class="breadcrumb-item active">Problem 2</li>
+<li class="breadcrumb-item active">Investigating the Dynamics of a Forced Damped Pendulum</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,7 +201,122 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-2">Problem 2</h1>
+<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum"><strong>Investigating the Dynamics of a Forced Damped Pendulum</strong></h1>
+<h2 id="1-theoretical-foundation"><strong>1. Theoretical Foundation</strong></h2>
+<p>The forced damped pendulum is governed by the nonlinear differential equation:</p>
+<p>$$[
+\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + c \sin\theta = A \cos(\omega t)
+$$]</p>
+<p>where:
+- <span class="arithmatex">\( \theta \)</span> is the angular displacement,
+- <span class="arithmatex">\( b \)</span> is the damping coefficient,
+- <span class="arithmatex">\( c \)</span> represents the gravitational restoring force (<span class="arithmatex">\( g/L \)</span>),
+- <span class="arithmatex">\( A \)</span> is the amplitude of the external driving force,
+- <span class="arithmatex">\( \omega \)</span> is the driving frequency.</p>
+<h3 id="small-angle-approximation"><strong>Small-Angle Approximation</strong></h3>
+<p>For small angles (<span class="arithmatex">\( \theta \approx \sin\theta \)</span>), the equation reduces to a <strong>driven damped harmonic oscillator</strong>:</p>
+<p>$$[
+\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + c \theta = A \cos(\omega t)
+$$]</p>
+<p>which has a well-known analytical solution for periodic motion. However, for larger angles, <strong>chaotic motion</strong> can arise.</p>
+<h3 id="resonance-condition"><strong>Resonance Condition</strong></h3>
+<p>When the driving frequency <span class="arithmatex">\( \omega \)</span> is close to the <strong>natural frequency</strong> of the pendulum:</p>
+<p>$$[
+\omega_0 = \sqrt{c}
+$$]</p>
+<p>resonance occurs, leading to <strong>large oscillations</strong>. The presence of damping limits this growth.</p>
+<hr/>
+<h2 id="2-python-implementation"><strong>2. Python Implementation</strong></h2>
+<p>To analyze the pendulum, we solve the nonlinear equation numerically using <strong>Runge-Kutta (RK45)</strong>.</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Define the forced damped pendulum differential equation
+def forced_damped_pendulum(t, y, b, c, A, omega):
+    """
+    Computes the derivatives for the forced damped pendulum.
+    :param t: Time variable
+    :param y: [theta, omega] where theta is the angle and omega is the angular velocity
+    :param b: Damping coefficient
+    :param c: Strength of the restoring force (gravity / length)
+    :param A: Driving force amplitude
+    :param omega: Driving force frequency
+    :return: [dtheta/dt, domega/dt]
+    """
+    theta, omega_vel = y
+    dtheta_dt = omega_vel
+    domega_dt = -b * omega_vel - c * np.sin(theta) + A * np.cos(omega * t)
+    return [dtheta_dt, domega_dt]
+
+# Parameters
+b = 0.5    # Damping coefficient
+c = 1.0    # Gravity/Length
+A = 1.2    # Driving force amplitude
+omega_d = 2.0  # Driving frequency
+
+time_span = (0, 50)  # Time range
+initial_conditions = [0.5, 0]  # Initial angle and velocity
+time_eval = np.linspace(*time_span, 1000)  # Time points for evaluation
+
+# Solve the system using Runge-Kutta method
+sol = solve_ivp(forced_damped_pendulum, time_span, initial_conditions, args=(b, c, A, omega_d), t_eval=time_eval)
+
+# Plot the time evolution of theta
+plt.figure(figsize=(8, 5))
+plt.plot(sol.t, sol.y[0], label='Theta (Angle)')
+plt.xlabel('Time')
+plt.ylabel('Theta (radians)')
+plt.title('Forced Damped Pendulum Motion')
+plt.legend()
+plt.grid()
+plt.show()
+
+# Phase space plot (theta vs. omega)
+plt.figure(figsize=(8, 5))
+plt.plot(sol.y[0], sol.y[1], label='Phase Space (Theta vs. Omega)')
+plt.xlabel('Theta (radians)')
+plt.ylabel('Omega (angular velocity)')
+plt.title('Phase Space of Forced Damped Pendulum')
+plt.legend()
+plt.grid()
+plt.show()
+</code></pre>
+<hr/>
+<h2 id="3-results-and-graphical-analysis"><strong>3. Results and Graphical Analysis</strong></h2>
+<h3 id="time-evolution-of-theta"><strong>Time Evolution of <span class="arithmatex">\( \theta \)</span></strong></h3>
+<ul>
+<li>For <strong>low damping</strong>, the pendulum oscillates periodically.</li>
+<li>Increasing the <strong>driving force amplitude</strong> <span class="arithmatex">\( A \)</span> can cause <strong>irregular (chaotic) motion</strong>.</li>
+<li>At <strong>resonance</strong>, oscillations become large.</li>
+</ul>
+<h3 id="phase-space-analysis"><strong>Phase Space Analysis</strong></h3>
+<p>The <strong>(θ, ω)</strong> phase space plot shows:
+- <strong>Simple periodic motion</strong> (closed loops) for weak forcing.
+- <strong>Chaotic motion</strong> (random patterns) for high driving amplitudes.</p>
+<hr/>
+<h2 id="4-practical-applications"><strong>4. Practical Applications</strong></h2>
+<p>The forced damped pendulum models various real-world systems:
+- <strong>Energy Harvesting:</strong> Vibration-based energy harvesting devices.
+- <strong>Mechanical Systems:</strong> Suspension bridges under periodic forces (e.g., Tacoma Narrows Bridge collapse).
+- <strong>Electrical Circuits:</strong> Analogous to <strong>driven RLC circuits</strong> in electronics.</p>
+<hr/>
+<h2 id="5-limitations-possible-extensions"><strong>5. Limitations &amp; Possible Extensions</strong></h2>
+<h3 id="limitations"><strong>Limitations:</strong></h3>
+<ul>
+<li>The model assumes <strong>constant damping</strong> and <strong>periodic forcing</strong>.</li>
+<li>It <strong>ignores</strong> factors like air resistance or turbulent forces.</li>
+</ul>
+<h3 id="extensions"><strong>Extensions:</strong></h3>
+<ul>
+<li><strong>Chaos Analysis:</strong> Compute <strong>Poincaré sections</strong> to visualize chaotic trajectories.</li>
+<li><strong>Bifurcation Diagrams:</strong> Show how <strong>small parameter changes</strong> lead to <strong>chaotic motion</strong>.</li>
+<li><strong>Non-periodic Forcing:</strong> Explore <strong>real-world forcing functions</strong> (e.g., earthquakes).</li>
+</ul>
+<hr/>
+<h3 id="final-thoughts"><strong>Final Thoughts</strong></h3>
+<p>This study bridges <strong>theory</strong> and <strong>computation</strong>, demonstrating how a simple system exhibits complex dynamics.</p>
+<p>Would you like to explore <strong>Poincaré maps</strong>, <strong>bifurcation diagrams</strong>, or <strong>chaos analysis</strong>? 🚀</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
