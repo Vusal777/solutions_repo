@@ -101,7 +101,7 @@ plt.show()
 
 ### **Time Evolution of $({ \theta }$)**
 - For **low damping**, the pendulum oscillates periodically.
-- Increasing the **driving force amplitude** \( A \) can cause **irregular (chaotic) motion**.
+- Increasing the **driving force amplitude**  <b><i>A</b></i> can cause **irregular (chaotic) motion**.
 - At **resonance**, oscillations become large.
 
 ### **Phase Space Analysis**
