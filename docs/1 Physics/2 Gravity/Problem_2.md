@@ -53,7 +53,7 @@ $$
 v_2 = \sqrt{\frac{2GM}{r}}
 $$
 
-Since $v_3 = \sqrt{2} v_1$, escape velocity is **about 41% higher than orbital velocity**.  
+Since $v_2 = \sqrt{2} v_1$, escape velocity is **about 41% higher than orbital velocity**.  
 
 For Earth:  
 
@@ -79,7 +79,7 @@ $$
 v_3 \approx 42.1 \text{ km/s}
 $$
 
-A spacecraft must exceed **42.1 km/s** to completely leave the Solar System, considering Earth's initial orbital speed ($ v_{\text{Earth}} = 29.78 $ km/s). Thus, an additional **12.3 km/s** is needed beyond Earth's motion.  
+A spacecraft must exceed **42.1 km/s** to completely leave the Solar System, considering Earth's initial orbital speed ($v_{\text{Earth}} = 29.78$ km/s). Thus, an additional **12.3 km/s** is needed beyond Earth's motion.  
 
 **Examples of Spacecraft Achieving Third Cosmic Velocity:**  
 - Voyager 1: **~17 km/s** (relative to Sun) – **fastest human-made object**, currently in interstellar space.  
