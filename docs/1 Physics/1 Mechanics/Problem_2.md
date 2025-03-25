@@ -133,5 +133,3 @@ The forced damped pendulum models various real-world systems:
 
 ### **Final Thoughts**
 This study bridges **theory** and **computation**, demonstrating how a simple system exhibits complex dynamics.
-
-Would you like to explore **Poincaré maps**, **bifurcation diagrams**, or **chaos analysis**? 🚀
