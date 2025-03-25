@@ -84,7 +84,7 @@ plt.legend()
 plt.grid()
 plt.show()
 ```
-
+![alt text](image.png)
 ---
 
 ## **3. Results and Graphical Analysis**  
