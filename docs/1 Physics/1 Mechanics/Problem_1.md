@@ -45,9 +45,9 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 $$
 
 ### **Key Observations:**
-- **Maximum Range:** Achieved at $$( \theta = 45^\circ $$).
-- **Symmetry:** The range function is symmetric around $$( 45^\circ $$) (i.e., $$( R(30^\circ) = R(60^\circ) $$)).
-- **Velocity Dependence:** Increasing $$( v_0 $$) increases the range.
+- **Maximum Range:** Achieved at $$ \theta = 45^\circ $$.
+- **Symmetry:** The range function is symmetric around $$ 45^\circ $$ (i.e., $$ R(30^\circ) = R(60^\circ) $$).
+- **Velocity Dependence:** Increasing $$ v_0 $$ increases the range.
 
 ---
 
@@ -92,7 +92,7 @@ plt.show()
 ### **Graph Interpretation**
 - The **range vs. launch angle** graph is a **parabolic curve**.
 - The range reaches a **maximum at 45°**.
-- **Identical Ranges** at complementary angles $$( \theta $$) and $$( 90^\circ - \theta $$).
+- **Identical Ranges** at complementary angles $$ \theta $$ and $$ 90^\circ - \theta $$.
 
 | Angle (°) | Range (m) |
 |-----------|----------|
@@ -122,7 +122,7 @@ plt.show()
 - **Constant Gravity:** Gravity changes slightly at different altitudes.
 
 ### **Possible Extensions**
-- **Include Air Resistance:** Use drag force $$F = -kv^2$$.
+- **Include Air Resistance:** Use drag force $$ F = -kv^2$$ .
 - **Variable Gravity:** Adjust \( g \) for planetary simulations.
 - **Sloped Terrain Impact:** Modify landing conditions.
 
