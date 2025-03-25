@@ -67,7 +67,7 @@ This equation shows that the **square of the orbital period** is directly propor
 ## Astronomical Implications  
 
 ### 1. **Determining Planetary Distances and Masses**  
-Since $( T^2 \propto r^3 $), by measuring the period of a planet or moon, its orbital radius can be estimated. Conversely, knowing the radius and period, one can infer the **mass of the central body** using:  
+Since $(T^2 \propto r^3$), by measuring the period of a planet or moon, its orbital radius can be estimated. Conversely, knowing the radius and period, one can infer the **mass of the central body** using:  
 
 $$
 M = \frac{4\pi^2 r^3}{G T^2}
