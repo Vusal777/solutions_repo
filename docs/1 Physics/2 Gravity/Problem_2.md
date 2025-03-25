@@ -142,7 +142,7 @@ ax.grid(True)
 
 plt.show()
 ```
-
+![alt text](image-1.png)
 ### **Results**  
 The bar chart visually compares orbital and escape velocities for Earth, Mars, and Jupiter. The trend shows that:  
 - **Jupiter has the highest escape velocity** due to its massive gravitational pull.  
