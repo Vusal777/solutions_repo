@@ -17,7 +17,7 @@ where:
 - <b> ω </b> is the driving frequency.
 
 ### **Small-Angle Approximation**
-For small angles ($$ θ ≈ sinθ $$), the equation reduces to a **driven damped harmonic oscillator**:
+For small angles ($ \theta \approx \sin\theta $), the equation reduces to a **driven damped harmonic oscillator**:
 
 $$
 \frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + c \theta = A \cos(\omega t)
