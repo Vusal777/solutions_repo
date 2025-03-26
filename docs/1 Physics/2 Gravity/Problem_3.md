@@ -157,7 +157,7 @@ The simulation visually confirms these trajectories, showing **Earth as a refere
 For a stable orbit (e.g., **LEO**), the payload’s velocity must match the required orbital speed. **Too slow**, and it falls back; **too fast**, and it escapes.  
 
 ### **Reentry**  
-A payload with **suborbital velocity** (\( v < v_{\text{circular}} \)) reenters Earth's atmosphere, requiring controlled descent for **safe landings**.  
+A payload with **suborbital velocity** ($v < v_{\text{circular}} $) reenters Earth's atmosphere, requiring controlled descent for **safe landings**.  
 
 ### **Escape Missions**  
 A payload exceeding **11.2 km/s** at 400 km altitude escapes Earth’s gravity—necessary for **lunar or interplanetary missions**.  
