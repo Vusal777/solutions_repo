@@ -138,9 +138,8 @@ plt.ylabel("Y (m)")
 plt.grid(True)
 plt.show()
 ```  
-
 ---
-
+![alt text](image-3.png)
 ## **Results**  
 
 - **Circular Orbit (\( v = 7.6 \) km/s)** → The payload follows a **stable orbit**.  
