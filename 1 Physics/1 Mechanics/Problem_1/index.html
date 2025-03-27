@@ -78,8 +78,6 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#possible-extensions">Possible Extensions</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#final-thoughts">Final Thoughts</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -220,19 +218,19 @@
    $$</li>
 </ol>
 <h3 id="time-of-flight"><strong>Time of Flight</strong></h3>
-<p>The projectile reaches the ground when ( y = 0 ), solving for <span class="arithmatex">\( t \)</span>:</p>
+<p>The projectile reaches the ground when <span class="arithmatex">\(y = 0\)</span>, solving for <span class="arithmatex">\(t\)</span>:</p>
 <div class="arithmatex">\[
 0 = v_0 \sin(\theta) t - \frac{1}{2} g t^2
 \]</div>
 <div class="arithmatex">\[
 t (v_0 \sin(\theta) - \frac{1}{2} g t) = 0
 \]</div>
-<p>This gives two solutions: <span class="arithmatex">\( t = 0 \)</span> (initial launch) and:</p>
+<p>This gives two solutions: <span class="arithmatex">\(t = 0\)</span> (initial launch) and:</p>
 <div class="arithmatex">\[
 t = \frac{2 v_0 \sin(\theta)}{g}
 \]</div>
 <h3 id="range-of-the-projectile"><strong>Range of the Projectile</strong></h3>
-<p>The range ( R ) is the horizontal distance covered in time <span class="arithmatex">\( t \)</span>:</p>
+<p>The range ( R ) is the horizontal distance covered in time <span class="arithmatex">\(t\)</span>:</p>
 <div class="arithmatex">\[
 R = v_0 \cos(\theta) \times T
 \]</div>
@@ -242,9 +240,9 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 \]</div>
 <h3 id="key-observations"><strong>Key Observations:</strong></h3>
 <ul>
-<li><strong>Maximum Range:</strong> Achieved at $$ \theta = 45^\circ $$.</li>
-<li><strong>Symmetry:</strong> The range function is symmetric around $$ 45^\circ $$ (i.e., $$ R(30^\circ) = R(60^\circ) $$).</li>
-<li><strong>Velocity Dependence:</strong> Increasing $$ v_0 $$ increases the range.</li>
+<li><strong>Maximum Range:</strong> Achieved at <span class="arithmatex">\(\theta = 45^\circ\)</span>.</li>
+<li><strong>Symmetry:</strong> The range function is symmetric around <span class="arithmatex">\(45^\circ\)</span> (i.e., <span class="arithmatex">\(R(30^\circ) = R(60^\circ)\)</span>).</li>
+<li><strong>Velocity Dependence:</strong> Increasing <span class="arithmatex">\(v_0\)</span> increases the range.</li>
 </ul>
 <hr/>
 <h2 id="2-python-implementation"><strong>2. Python Implementation</strong></h2>
@@ -284,7 +282,7 @@ plt.show()
 <ul>
 <li>The <strong>range vs. launch angle</strong> graph is a <strong>parabolic curve</strong>.</li>
 <li>The range reaches a <strong>maximum at 45°</strong>.</li>
-<li><strong>Identical Ranges</strong> at complementary angles $$ \theta $$ and $$ 90^\circ - \theta $$.</li>
+<li><strong>Identical Ranges</strong> at complementary angles <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(90^\circ - \theta\)</span>.</li>
 </ul>
 <table>
 <thead>
@@ -343,12 +341,10 @@ plt.show()
 <h3 id="possible-extensions"><strong>Possible Extensions</strong></h3>
 <ul>
 <li><strong>Include Air Resistance:</strong> Use drag force $$ F = -kv^2$$ .</li>
-<li><strong>Variable Gravity:</strong> Adjust <span class="arithmatex">\( g \)</span> for planetary simulations.</li>
+<li><strong>Variable Gravity:</strong> Adjust <span class="arithmatex">\(g\)</span> for planetary simulations.</li>
 <li><strong>Sloped Terrain Impact:</strong> Modify landing conditions.</li>
 </ul>
 <hr/>
-<h3 id="final-thoughts"><strong>Final Thoughts</strong></h3>
-<p>This study provides a strong <strong>theoretical</strong> and <strong>computational</strong> analysis of projectile motion. Would you like to extend this model to include <strong>air resistance</strong> or <strong>variable launch heights</strong>? 🚀</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
