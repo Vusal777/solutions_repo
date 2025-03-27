@@ -137,6 +137,59 @@ To explore more complex cases, we can extend the simulation to:
 2. **Use a Runge-Kutta method** for more accurate integration.
 3. **Simulate non-uniform magnetic fields** found in real-world systems.
 
+Another Example:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Constants
+q = 1.0       # Charge of particle (arbitrary units)
+m = 1.0       # Mass of particle (arbitrary units)
+B = np.array([0, 0, 1])  # Magnetic field (along z-axis)
+E = np.array([0, 0, 0])  # Electric field (set to zero initially)
+dt = 0.01     # Time step
+t_max = 10    # Simulation time
+
+# Initial conditions: position (x, y, z) and velocity (vx, vy, vz)
+state = np.array([0, 0, 0, 1, 1, 0])  # Starts at origin with velocity (1,1,0)
+
+# Lorentz force equation: dv/dt = (q/m) * (E + v x B)
+def lorentz_force(state, q, m, E, B):
+    r = state[:3]  # Position (x, y, z)
+    v = state[3:]  # Velocity (vx, vy, vz)
+    dvdt = (q / m) * (E + np.cross(v, B))  # Compute acceleration
+    return np.hstack((v, dvdt))  # Return derivative of state
+
+# Runge-Kutta 4th Order Integration
+def rk4_step(state, dt, q, m, E, B):
+    k1 = lorentz_force(state, q, m, E, B) * dt
+    k2 = lorentz_force(state + k1 / 2, q, m, E, B) * dt
+    k3 = lorentz_force(state + k2 / 2, q, m, E, B) * dt
+    k4 = lorentz_force(state + k3, q, m, E, B) * dt
+    return state + (k1 + 2 * k2 + 2 * k3 + k4) / 6  # RK4 formula
+
+# Simulate motion
+time = np.arange(0, t_max, dt)
+trajectory = np.zeros((len(time), 3))
+
+for i, t in enumerate(time):
+    trajectory[i] = state[:3]  # Store position
+    state = rk4_step(state, dt, q, m, E, B)  # Update state
+
+# Plot results
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+ax.plot(trajectory[:, 0], trajectory[:, 1], trajectory[:, 2], label="Particle Path")
+ax.set_xlabel("X Position")
+ax.set_ylabel("Y Position")
+ax.set_zlabel("Z Position")
+ax.set_title("Lorentz Force Simulation (Uniform B Field)")
+ax.legend()
+plt.show()
+```
+![alt text](image-2.png)
 ---
 
 ## **Conclusion**
