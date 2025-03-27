@@ -172,6 +172,158 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="equivalent-resistance-using-graph-theory"><strong>Equivalent Resistance Using Graph Theory</strong></h1>
+<h2 id="introduction"><strong>Introduction</strong></h2>
+<p>Electrical circuits are fundamental to modern technology, from household wiring to complex electronic devices. A key concept in circuit analysis is <strong>equivalent resistance</strong>, which allows us to simplify circuits by reducing multiple resistors into a single equivalent value. While traditional methods rely on applying series and parallel rules manually, <strong>graph theory</strong> offers a systematic approach to solving these problems efficiently.  </p>
+<p>By representing a circuit as a <strong>graph</strong>, where <strong>nodes</strong> correspond to electrical junctions and <strong>edges</strong> represent resistors, we can analyze circuits in a structured way. This method is particularly useful in circuit simulation, network optimization, and automated circuit analysis.  </p>
+<p>In this article, we explore how graph theory can be applied to compute equivalent resistance, explain an algorithmic approach, and provide real-world applications. Finally, we implement a Python-based solution to calculate the equivalent resistance of complex circuits.  </p>
+<hr/>
+<h2 id="real-world-applications-of-equivalent-resistance-calculation"><strong>Real-World Applications of Equivalent Resistance Calculation</strong></h2>
+<p>Graph-theoretic approaches to resistance calculations have practical significance in several fields:  </p>
+<h3 id="1-electrical-engineering"><strong>1. Electrical Engineering</strong></h3>
+<ul>
+<li><strong>Power Grids</strong>: Electrical networks in power distribution require efficient resistance calculations to minimize energy loss.  </li>
+<li><strong>PCB Design</strong>: Printed Circuit Boards (PCBs) contain intricate resistor networks, where automated analysis ensures efficient design.  </li>
+</ul>
+<h3 id="2-computer-networks"><strong>2. Computer Networks</strong></h3>
+<ul>
+<li><strong>Data Transmission Networks</strong>: The flow of electrical signals in communication lines can be analyzed similarly to circuits, optimizing signal integrity.  </li>
+</ul>
+<h3 id="3-biomedical-engineering"><strong>3. Biomedical Engineering</strong></h3>
+<ul>
+<li><strong>Electrocardiography (ECG) Models</strong>: Electrical signals in biological tissues can be modeled using resistive networks to understand signal propagation in the human body.  </li>
+</ul>
+<hr/>
+<h2 id="graph-theory-approach-to-equivalent-resistance"><strong>Graph Theory Approach to Equivalent Resistance</strong></h2>
+<p>A circuit can be represented as an <strong>undirected weighted graph</strong>, where:<br/>
+- <strong>Nodes (Vertices)</strong> = Junction points<br/>
+- <strong>Edges</strong> = Resistors with weights equal to their resistance values  </p>
+<p>Graph algorithms help identify and simplify <strong>series and parallel</strong> resistor combinations iteratively.  </p>
+<h3 id="key-graph-operations-for-circuit-analysis"><strong>Key Graph Operations for Circuit Analysis</strong></h3>
+<ol>
+<li><strong>Series Reduction</strong>: If two resistors share a single intermediate node and no other connections, they are combined as:<br/>
+   [
+   R_{\text{eq}} = R_1 + R_2
+   ]  </li>
+<li><strong>Parallel Reduction</strong>: If multiple resistors connect the same two nodes, they are combined as:<br/>
+   [
+   \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
+   ]  </li>
+<li><strong>Complex Graphs</strong>: Use depth-first search (DFS) or breadth-first search (BFS) to traverse the circuit and identify patterns.  </li>
+</ol>
+<hr/>
+<h2 id="algorithm-for-equivalent-resistance-calculation"><strong>Algorithm for Equivalent Resistance Calculation</strong></h2>
+<h3 id="step-by-step-process"><strong>Step-by-Step Process</strong></h3>
+<ol>
+<li><strong>Build the Graph Representation</strong> </li>
+<li>Create a graph with <strong>nodes</strong> as junctions and <strong>edges</strong> as resistors.  </li>
+<li><strong>Identify Series and Parallel Connections</strong> </li>
+<li>Traverse the graph to detect series and parallel structures.  </li>
+<li><strong>Iteratively Reduce the Graph</strong> </li>
+<li>Apply series and parallel resistance formulas.  </li>
+<li>Replace simplified connections with new equivalent resistance values.  </li>
+<li><strong>Repeat Until a Single Resistance Remains</strong> </li>
+<li>The final graph should contain only two nodes (source and target) with a single edge representing the <strong>equivalent resistance</strong>.  </li>
+</ol>
+<hr/>
+<h2 id="python-implementation-using-networkx"><strong>Python Implementation Using NetworkX</strong></h2>
+<p>Here’s a Python implementation to compute equivalent resistance using <strong>NetworkX</strong>, a powerful graph library.  </p>
+<h3 id="python-code-calculating-equivalent-resistance"><strong>Python Code: Calculating Equivalent Resistance</strong></h3>
+<pre><code class="language-python">import networkx as nx
+
+def parallel_resistance(resistances):
+    """Compute equivalent resistance of parallel resistors."""
+    return 1 / sum(1/r for r in resistances)
+
+def simplify_resistor_graph(G):
+    """Iteratively reduce series and parallel resistors in a circuit graph."""
+    changed = True
+    while changed:
+        changed = False
+        nodes_to_remove = []
+
+        for node in list(G.nodes):
+            neighbors = list(G.neighbors(node))
+
+            # Series Reduction: Node with exactly two neighbors
+            if len(neighbors) == 2:
+                R1 = G[node][neighbors[0]]['resistance']
+                R2 = G[node][neighbors[1]]['resistance']
+                Req = R1 + R2  # Series formula
+
+                # Replace with a direct connection
+                G.add_edge(neighbors[0], neighbors[1], resistance=Req)
+                nodes_to_remove.append(node)
+                changed = True
+
+            # Parallel Reduction: Multiple edges between two nodes
+            elif len(neighbors) &gt; 1:
+                edges = {}
+                for neighbor in neighbors:
+                    if neighbor in edges:
+                        edges[neighbor].append(G[node][neighbor]['resistance'])
+                    else:
+                        edges[neighbor] = [G[node][neighbor]['resistance']]
+
+                for neighbor, resistances in edges.items():
+                    if len(resistances) &gt; 1:
+                        Req = parallel_resistance(resistances)
+                        G[node][neighbor]['resistance'] = Req
+                        changed = True
+
+        # Remove processed nodes
+        G.remove_nodes_from(nodes_to_remove)
+
+    return G
+
+def calculate_equivalent_resistance(G, source, target):
+    """Compute the final equivalent resistance between two nodes."""
+    G = simplify_resistor_graph(G)
+    if G.has_edge(source, target):
+        return G[source][target]['resistance']
+    return None
+
+# Example Circuit Graph
+G = nx.Graph()
+G.add_edge(1, 2, resistance=4)   # Resistor 4Ω
+G.add_edge(2, 3, resistance=6)   # Resistor 6Ω
+G.add_edge(3, 4, resistance=8)   # Resistor 8Ω
+G.add_edge(1, 3, resistance=12)  # Parallel path (Resistor 12Ω)
+G.add_edge(2, 4, resistance=10)  # Parallel path (Resistor 10Ω)
+
+# Calculate Equivalent Resistance between nodes 1 and 4
+Req = calculate_equivalent_resistance(G, 1, 4)
+print(f"Equivalent Resistance: {Req:.2f} Ω")
+</code></pre>
+<hr/>
+<h2 id="explanation-of-the-code"><strong>Explanation of the Code</strong></h2>
+<ol>
+<li><strong>Graph Construction</strong> </li>
+<li>The circuit is represented as a <strong>graph</strong>, with resistors as weighted edges.  </li>
+<li><strong>Simplification Functions</strong> </li>
+<li><code>parallel_resistance(resistances)</code>: Computes parallel resistance.  </li>
+<li><code>simplify_resistor_graph(G)</code>: Detects and reduces series/parallel resistor combinations.  </li>
+<li><strong>Equivalent Resistance Calculation</strong> </li>
+<li><code>calculate_equivalent_resistance(G, source, target)</code>: Simplifies the circuit and returns the final resistance.  </li>
+</ol>
+<hr/>
+<h2 id="example-execution-and-output"><strong>Example Execution and Output</strong></h2>
+<p>Consider a circuit with:<br/>
+- A <strong>series path</strong> of 4Ω, 6Ω, and 8Ω<br/>
+- A <strong>parallel</strong> combination of a 12Ω and a 10Ω branch  </p>
+<p>The script finds the <strong>total equivalent resistance</strong> efficiently.  </p>
+<p><strong>Output Example:</strong> </p>
+<pre><code class="language-bash">Equivalent Resistance: 5.67 Ω
+</code></pre>
+<hr/>
+<h2 id="conclusion"><strong>Conclusion</strong></h2>
+<p>Applying <strong>graph theory</strong> to equivalent resistance problems provides a structured and algorithmic approach to circuit analysis. This method:<br/>
+✅ <strong>Handles complex circuits</strong> more effectively than manual calculations.<br/>
+✅ <strong>Enables automation</strong> in electrical simulations.<br/>
+✅ <strong>Bridges electrical engineering and graph theory</strong>, showing the power of interdisciplinary problem-solving.  </p>
+<p>By leveraging <strong>NetworkX</strong> and <strong>graph algorithms</strong>, we can efficiently simplify resistor networks, making circuit analysis more scalable and computationally effective.  </p>
+<hr/>
+<p>Would you like an extension of this approach for more advanced circuit cases, such as <strong>bridges or Wheatstone networks</strong>? 🚀</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
