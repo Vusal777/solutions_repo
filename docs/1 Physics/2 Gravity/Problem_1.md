@@ -1,4 +1,3 @@
-# Problem 1
 # Orbital Period and Orbital Radius: Understanding Kepler’s Third Law  
 
 ## Motivation  
