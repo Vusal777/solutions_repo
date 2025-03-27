@@ -202,13 +202,13 @@
 <h3 id="key-graph-operations-for-circuit-analysis"><strong>Key Graph Operations for Circuit Analysis</strong></h3>
 <ol>
 <li><strong>Series Reduction</strong>: If two resistors share a single intermediate node and no other connections, they are combined as:<br/>
-   [
+   $$
    R_{\text{eq}} = R_1 + R_2
-   ]  </li>
+   $$  </li>
 <li><strong>Parallel Reduction</strong>: If multiple resistors connect the same two nodes, they are combined as:<br/>
-   [
+   $$
    \frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots
-   ]  </li>
+   $$  </li>
 <li><strong>Complex Graphs</strong>: Use depth-first search (DFS) or breadth-first search (BFS) to traverse the circuit and identify patterns.  </li>
 </ol>
 <hr/>
@@ -228,93 +228,96 @@
 <hr/>
 <h2 id="python-implementation-using-networkx"><strong>Python Implementation Using NetworkX</strong></h2>
 <p>Here’s a Python implementation to compute equivalent resistance using <strong>NetworkX</strong>, a powerful graph library.  </p>
-<h3 id="python-code-calculating-equivalent-resistance"><strong>Python Code: Calculating Equivalent Resistance</strong></h3>
+<h3 id="python-code-with-graph-visualization"><strong>Python Code with Graph Visualization</strong></h3>
 <pre><code class="language-python">import networkx as nx
+import matplotlib.pyplot as plt
 
-def parallel_resistance(resistances):
-    """Compute equivalent resistance of parallel resistors."""
-    return 1 / sum(1/r for r in resistances)
+def parallel_resistance(*resistors):
+    """Calculate equivalent resistance of resistors in parallel."""
+    if len(resistors) == 0:
+        return float('inf')
+    return 1 / sum(1 / r for r in resistors if r &gt; 0)
 
-def simplify_resistor_graph(G):
-    """Iteratively reduce series and parallel resistors in a circuit graph."""
-    changed = True
-    while changed:
-        changed = False
-        nodes_to_remove = []
+def simplify_circuit(G):
+    """Reduce the graph by identifying and simplifying series and parallel resistances."""
+    G = G.copy()  # Work on a copy to avoid modifying the original graph
 
+    while True:
+        merged = False
+
+        # Detect and reduce series connections (degree-2 nodes)
         for node in list(G.nodes):
             neighbors = list(G.neighbors(node))
-
-            # Series Reduction: Node with exactly two neighbors
             if len(neighbors) == 2:
-                R1 = G[node][neighbors[0]]['resistance']
-                R2 = G[node][neighbors[1]]['resistance']
-                Req = R1 + R2  # Series formula
+                n1, n2 = neighbors
+                if G.has_edge(n1, node) and G.has_edge(node, n2):
+                    r1 = G[n1][node]['weight']
+                    r2 = G[node][n2]['weight']
+                    req = r1 + r2  # Series resistance formula
 
-                # Replace with a direct connection
-                G.add_edge(neighbors[0], neighbors[1], resistance=Req)
-                nodes_to_remove.append(node)
-                changed = True
+                    # Add new connection and remove intermediate node
+                    G.add_edge(n1, n2, weight=req)
+                    G.remove_node(node)
+                    merged = True
+                    break  # Restart loop after each merge to avoid conflicts
 
-            # Parallel Reduction: Multiple edges between two nodes
-            elif len(neighbors) &gt; 1:
-                edges = {}
-                for neighbor in neighbors:
-                    if neighbor in edges:
-                        edges[neighbor].append(G[node][neighbor]['resistance'])
-                    else:
-                        edges[neighbor] = [G[node][neighbor]['resistance']]
+        # Detect and reduce parallel resistances
+        for u, v in list(G.edges):
+            parallel_edges = [d['weight'] for x, y, d in G.edges(data=True) if {x, y} == {u, v}]
+            if len(parallel_edges) &gt; 1:
+                req = parallel_resistance(*parallel_edges)
 
-                for neighbor, resistances in edges.items():
-                    if len(resistances) &gt; 1:
-                        Req = parallel_resistance(resistances)
-                        G[node][neighbor]['resistance'] = Req
-                        changed = True
+                # Remove all existing parallel edges
+                G.remove_edges_from([(u, v) for _ in parallel_edges])
+                G.add_edge(u, v, weight=req)
+                merged = True
+                break  # Restart loop after each merge
 
-        # Remove processed nodes
-        G.remove_nodes_from(nodes_to_remove)
+        if not merged:
+            break  # Stop when no more simplifications are possible
 
     return G
 
-def calculate_equivalent_resistance(G, source, target):
-    """Compute the final equivalent resistance between two nodes."""
-    G = simplify_resistor_graph(G)
-    if G.has_edge(source, target):
-        return G[source][target]['resistance']
-    return None
+def draw_graph(G, title="Resistor Network"):
+    """Draws the resistor network graph."""
+    pos = nx.spring_layout(G, seed=42)  # Generate positions for nodes
+    plt.figure(figsize=(6, 4))
 
-# Example Circuit Graph
+    # Draw the graph nodes and edges
+    nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=1000, font_size=12, edge_color='gray')
+
+    # Label the edges with resistance values
+    edge_labels = {(u, v): f"{d['weight']}Ω" for u, v, d in G.edges(data=True)}
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=10)
+
+    plt.title(title)
+    plt.show()
+
+# Define circuit as a graph (Nodes = junctions, Edges = resistors)
 G = nx.Graph()
-G.add_edge(1, 2, resistance=4)   # Resistor 4Ω
-G.add_edge(2, 3, resistance=6)   # Resistor 6Ω
-G.add_edge(3, 4, resistance=8)   # Resistor 8Ω
-G.add_edge(1, 3, resistance=12)  # Parallel path (Resistor 12Ω)
-G.add_edge(2, 4, resistance=10)  # Parallel path (Resistor 10Ω)
+G.add_edge(1, 2, weight=4)  # 4Ω resistor
+G.add_edge(2, 3, weight=6)  # 6Ω resistor
+G.add_edge(3, 4, weight=3)  # 3Ω resistor
+G.add_edge(1, 4, weight=5)  # 5Ω resistor
+G.add_edge(2, 4, weight=2)  # 2Ω resistor (parallel with 5Ω)
 
-# Calculate Equivalent Resistance between nodes 1 and 4
-Req = calculate_equivalent_resistance(G, 1, 4)
-print(f"Equivalent Resistance: {Req:.2f} Ω")
+# Draw original circuit
+draw_graph(G, title="Original Resistor Network")
+
+# Simplify the circuit
+G_simplified = simplify_circuit(G)
+
+# Draw simplified circuit
+draw_graph(G_simplified, title="Simplified Resistor Network")
+
+# Compute equivalent resistance between nodes 1 and 4 (if exists)
+if G_simplified.has_edge(1, 4):
+    print(f"Equivalent Resistance: {G_simplified[1][4]['weight']} Ω")
+else:
+    print("No direct path found after reduction.")
 </code></pre>
-<hr/>
-<h2 id="explanation-of-the-code"><strong>Explanation of the Code</strong></h2>
-<ol>
-<li><strong>Graph Construction</strong> </li>
-<li>The circuit is represented as a <strong>graph</strong>, with resistors as weighted edges.  </li>
-<li><strong>Simplification Functions</strong> </li>
-<li><code>parallel_resistance(resistances)</code>: Computes parallel resistance.  </li>
-<li><code>simplify_resistor_graph(G)</code>: Detects and reduces series/parallel resistor combinations.  </li>
-<li><strong>Equivalent Resistance Calculation</strong> </li>
-<li><code>calculate_equivalent_resistance(G, source, target)</code>: Simplifies the circuit and returns the final resistance.  </li>
-</ol>
-<hr/>
-<h2 id="example-execution-and-output"><strong>Example Execution and Output</strong></h2>
-<p>Consider a circuit with:<br/>
-- A <strong>series path</strong> of 4Ω, 6Ω, and 8Ω<br/>
-- A <strong>parallel</strong> combination of a 12Ω and a 10Ω branch  </p>
-<p>The script finds the <strong>total equivalent resistance</strong> efficiently.  </p>
-<p><strong>Output Example:</strong> </p>
-<pre><code class="language-bash">Equivalent Resistance: 5.67 Ω
-</code></pre>
+<p><img alt="alt text" src="../image-1.png"/>
+<img alt="alt text" src="../image.png"/></p>
 <hr/>
 <h2 id="conclusion"><strong>Conclusion</strong></h2>
 <p>Applying <strong>graph theory</strong> to equivalent resistance problems provides a structured and algorithmic approach to circuit analysis. This method:<br/>
@@ -322,8 +325,6 @@ print(f"Equivalent Resistance: {Req:.2f} Ω")
 ✅ <strong>Enables automation</strong> in electrical simulations.<br/>
 ✅ <strong>Bridges electrical engineering and graph theory</strong>, showing the power of interdisciplinary problem-solving.  </p>
 <p>By leveraging <strong>NetworkX</strong> and <strong>graph algorithms</strong>, we can efficiently simplify resistor networks, making circuit analysis more scalable and computationally effective.  </p>
-<hr/>
-<p>Would you like an extension of this approach for more advanced circuit cases, such as <strong>bridges or Wheatstone networks</strong>? 🚀</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
