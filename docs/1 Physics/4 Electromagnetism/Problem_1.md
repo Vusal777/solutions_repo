@@ -137,7 +137,7 @@ To explore more complex cases, we can extend the simulation to:
 2. **Use a Runge-Kutta method** for more accurate integration.
 3. **Simulate non-uniform magnetic fields** found in real-world systems.
 
-Another Example:
+## Another Example:
 
 ```python
 import numpy as np
