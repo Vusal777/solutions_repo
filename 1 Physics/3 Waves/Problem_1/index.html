@@ -6,13 +6,13 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="../../../img/favicon.ico" rel="shortcut icon"/>
-<title>Problem 1 - Physics and Mathematics</title>
+<title>Interference Patterns on a Water Surface: A Deep Dive into Wave Superposition - Physics and Mathematics</title>
 <link href="../../../css/theme.css" rel="stylesheet"/>
 <link href="../../../css/theme_extra.css" rel="stylesheet"/>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
 <script>
         // Current page data
-        var mkdocs_page_name = "Problem 1";
+        var mkdocs_page_name = "Interference Patterns on a Water Surface: A Deep Dive into Wave Superposition";
         var mkdocs_page_input_path = "1 Physics/3 Waves/Problem_1.md";
         var mkdocs_page_url = null;
       </script>
@@ -64,8 +64,60 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal current">3 Waves</a>
 <ul class="current">
-<li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Interference Patterns on a Water Surface: A Deep Dive into Wave Superposition</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#motivation-why-study-water-surface-interference">Motivation: Why Study Water Surface Interference?</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background-wave-equation-and-superposition">Theoretical Background: Wave Equation and Superposition</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-single-disturbance-equation-for-a-circular-wave">The Single Disturbance Equation for a Circular Wave</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-equilateral-triangle-3-sources">Example 1: Equilateral Triangle (3 Sources)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-positioning-the-sources">Step 1: Positioning the Sources</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-wave-equations">Step 2: Wave Equations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-superposition">Step 3: Superposition</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-analyzing-patterns">Step 4: Analyzing Patterns</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-square-4-sources">Example 2: Square (4 Sources)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-positioning-the-sources_1">Step 1: Positioning the Sources</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-wave-equations_1">Step 2: Wave Equations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-superposition_1">Step 3: Superposition</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-analyzing-patterns_1">Step 4: Analyzing Patterns</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-3-regular-pentagon-5-sources">Example 3: Regular Pentagon (5 Sources)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-positioning-the-sources_2">Step 1: Positioning the Sources</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-superposition_2">Step 3: Superposition</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-analyzing-patterns_2">Step 4: Analyzing Patterns</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#bringing-it-to-life-python-simulation">Bringing It to Life: Python Simulation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#python-code-interference-from-a-pentagon-of-wave-sources">Python Code: Interference from a Pentagon of Wave Sources</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -163,7 +215,7 @@
 <li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
 <li class="breadcrumb-item">1 Physics</li>
 <li class="breadcrumb-item">3 Waves</li>
-<li class="breadcrumb-item active">Problem 1</li>
+<li class="breadcrumb-item active">Interference Patterns on a Water Surface: A Deep Dive into Wave Superposition</li>
 <li class="wy-breadcrumbs-aside">
 </li>
 </ul>
@@ -171,9 +223,6 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<h1 id="problem-1">Problem 1</h1>
-<p>Here’s a corrected and polished version of your article while preserving its clarity and technical depth.</p>
-<hr/>
 <h1 id="interference-patterns-on-a-water-surface-a-deep-dive-into-wave-superposition"><strong>Interference Patterns on a Water Surface: A Deep Dive into Wave Superposition</strong></h1>
 <p>When waves ripple across a water surface, they do not travel in isolation—they interact. These interactions, known as <strong>interference</strong>, create mesmerizing patterns that reveal fundamental wave behavior. Whether it’s the gentle overlap of ripples from raindrops or the complex interplay of waves from multiple sources, interference patterns offer a window into the physics of superposition.  </p>
 <p>This article explores how waves from <strong>point sources arranged at the vertices of regular polygons</strong> combine to form intricate patterns on a water surface. Through detailed examples, mathematical analysis, and visualizations, we will uncover the beauty and science behind these phenomena.  </p>
