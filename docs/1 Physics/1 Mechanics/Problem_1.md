@@ -15,7 +15,7 @@ Projectile motion follows Newton’s equations. We break the motion into **horiz
    $$
 
 ### **Time of Flight**  
-The projectile reaches the ground when ( y = 0 \), solving for \( t \):
+The projectile reaches the ground when $y = 0$, solving for $t$:
 
 $$
 0 = v_0 \sin(\theta) t - \frac{1}{2} g t^2
@@ -25,14 +25,14 @@ $$
 t (v_0 \sin(\theta) - \frac{1}{2} g t) = 0
 $$
 
-This gives two solutions: \( t = 0 \) (initial launch) and:
+This gives two solutions: $t = 0$ (initial launch) and:
 
 $$
 t = \frac{2 v_0 \sin(\theta)}{g}
 $$
 
 ### **Range of the Projectile**
-The range ( R ) is the horizontal distance covered in time \( t \):
+The range ( R ) is the horizontal distance covered in time $t$:
 
 $$
 R = v_0 \cos(\theta) \times T
@@ -45,9 +45,9 @@ R = \frac{v_0^2 \sin(2\theta)}{g}
 $$
 
 ### **Key Observations:**
-- **Maximum Range:** Achieved at $$ \theta = 45^\circ $$.
-- **Symmetry:** The range function is symmetric around $$ 45^\circ $$ (i.e., $$ R(30^\circ) = R(60^\circ) $$).
-- **Velocity Dependence:** Increasing $$ v_0 $$ increases the range.
+- **Maximum Range:** Achieved at $\theta = 45^\circ$.
+- **Symmetry:** The range function is symmetric around $45^\circ$ (i.e., $R(30^\circ) = R(60^\circ)$).
+- **Velocity Dependence:** Increasing $v_0$ increases the range.
 
 ---
 
@@ -92,7 +92,7 @@ plt.show()
 ### **Graph Interpretation**
 - The **range vs. launch angle** graph is a **parabolic curve**.
 - The range reaches a **maximum at 45°**.
-- **Identical Ranges** at complementary angles $$ \theta $$ and $$ 90^\circ - \theta $$.
+- **Identical Ranges** at complementary angles $\theta$ and $90^\circ - \theta$.
 
 | Angle (°) | Range (m) |
 |-----------|----------|
@@ -123,10 +123,7 @@ plt.show()
 
 ### **Possible Extensions**
 - **Include Air Resistance:** Use drag force $$ F = -kv^2$$ .
-- **Variable Gravity:** Adjust \( g \) for planetary simulations.
+- **Variable Gravity:** Adjust $g$ for planetary simulations.
 - **Sloped Terrain Impact:** Modify landing conditions.
 
 ---
-
-### **Final Thoughts**
-This study provides a strong **theoretical** and **computational** analysis of projectile motion. Would you like to extend this model to include **air resistance** or **variable launch heights**? 🚀
