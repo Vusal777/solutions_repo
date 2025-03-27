@@ -1,7 +1,3 @@
-# Problem 1
-Here’s a corrected and polished version of your article while preserving its clarity and technical depth.
-
----
 
 # **Interference Patterns on a Water Surface: A Deep Dive into Wave Superposition**
 
