@@ -122,7 +122,6 @@ ax.set_title('Charged Particle Motion in a Uniform Magnetic Field')
 plt.legend()
 plt.show()
 ```
-![alt text](image.png)
 
 ### **Interpreting the Results**
 - If the initial velocity is perpendicular to the magnetic field, the particle follows a **circular path**.
