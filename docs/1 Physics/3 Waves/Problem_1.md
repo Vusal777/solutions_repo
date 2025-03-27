@@ -61,10 +61,13 @@ The distance of a point $(x, y)$ from each source is:
 
 $$
 r_1 = \sqrt{x^2 + (y - \frac{\sqrt{3}}{2})^2}
+$$
 
+$$
 r_2 = \sqrt{(x + \frac{1}{2})^2 + (y + \frac{\sqrt{3}}{6})^2}
+$$
 
-r_3 = \sqrt{(x - \frac{1}{2})^2 + (y + \frac{\sqrt{3}}{6})^2}
+$$r_3 = \sqrt{(x - \frac{1}{2})^2 + (y + \frac{\sqrt{3}}{6})^2}
 $$
 
 The resulting wave from each source is:  
