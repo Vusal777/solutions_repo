@@ -336,28 +336,70 @@ plt.show()
 - <strong>Dependence</strong> between observations can invalidate the theorem unless handled properly.
 - The rate of convergence varies: heavily skewed or kurtotic distributions require larger <span class="arithmatex">\( n \)</span>.</p>
 <hr/>
+<h3 id="monte-carlo-simulation-for-random-walks">Monte Carlo Simulation for Random Walks</h3>
+<p>A <strong>random walk</strong> is a process where each step is independent, and each step is drawn from a random distribution, such as <span class="arithmatex">\(\pm 1\)</span>. By simulating many such random walks, we can calculate the average displacement at each step and observe how the distribution of these averages converges to a normal distribution.</p>
+<p>Here’s how to implement this using Python:</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Parameters for the simulation
+n_walks = 5000  # number of random walks
+n_steps = 100  # steps per walk
+
+# Simulating random walks
+walks = np.random.choice([-1, 1], size=(n_walks, n_steps))
+displacements = np.cumsum(walks, axis=1)
+
+# Now, calculate the sample mean for each walk at each step
+sample_means = np.mean(displacements, axis=0)
+
+# Visualizing the results
+plt.figure(figsize=(12, 6))
+
+# Plotting the distribution of the sample means after each step
+sns.histplot(sample_means, kde=True, bins=30, stat="density", color="cornflowerblue")
+
+# Add a normal distribution curve for comparison
+mu, sigma = np.mean(sample_means), np.std(sample_means)
+x = np.linspace(mu - 4*sigma, mu + 4*sigma, 100)
+plt.plot(x, 1/(sigma * np.sqrt(2 * np.pi)) * np.exp(-(x - mu)**2 / (2 * sigma**2)), 'r--', label="Normal Approximation")
+
+plt.title("Monte Carlo Simulation: Distribution of Sample Means (Random Walk)")
+plt.xlabel("Sample Mean")
+plt.ylabel("Density")
+plt.legend()
+plt.grid(True)
+plt.show()
+</code></pre>
+<h3 id="explanation">Explanation:</h3>
+<ol>
+<li>
+<p><strong>Random Walk Simulation</strong>: We simulate <span class="arithmatex">\(5000\)</span> random walks, each of length <span class="arithmatex">\(100\)</span>. At each step, the walker moves randomly either <span class="arithmatex">\(+1\)</span> or <span class="arithmatex">\(-1\)</span>.</p>
+</li>
+<li>
+<p><strong>Cumulative Sum</strong>: The displacement after each step is calculated using <code>np.cumsum</code> (cumulative sum of steps).</p>
+</li>
+<li>
+<p><strong>Sample Means</strong>: For each walk, we calculate the mean displacement after each step, which forms the basis for our "sample mean."</p>
+</li>
+<li>
+<p><strong>Visualization</strong>: We plot a histogram of the sample means after each step and overlay a normal distribution for comparison.</p>
+</li>
+</ol>
+<h3 id="results-interpretation">Results Interpretation:</h3>
+<ul>
+<li>At the beginning (with fewer steps), the distribution of sample means will be <strong>non-normal</strong>, reflecting the randomness and the small sample size.</li>
+<li>As the number of steps increases, the distribution of the sample means will converge to a <strong>normal distribution</strong>, demonstrating the Central Limit Theorem in action.</li>
+</ul>
+<p>This Monte Carlo approach visually reinforces the concept that regardless of the walk's randomness, the average over many walks follows a Gaussian distribution as the number of steps grows.</p>
+<p>Would you like me to add more features or explanations for this simulation?</p>
 <h2 id="11-conclusion">11. Conclusion</h2>
 <p>Through both theoretical exposition and detailed computational experiments, the Central Limit Theorem has been demonstrated as a universal and indispensable result in probability theory. Our simulations showed that even populations with highly non-normal shapes lead to normally distributed sample means when the sample size becomes large.</p>
 <p>Understanding the CLT provides crucial insight into statistical modeling, scientific experimentation, and quality assurance across various fields.</p>
-<hr/>
-<h2 id="references">References</h2>
-<ul>
-<li>Casella, G., &amp; Berger, R. L. (2002). <em>Statistical Inference</em>. Duxbury Press.</li>
-<li>Wasserman, L. (2004). <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer.</li>
-<li>Billingsley, P. (1995). <em>Probability and Measure</em>. Wiley.</li>
-</ul>
-<hr/>
-<h1 id="done">✅ Done</h1>
-<hr/>
-<p><strong>This is now a full, high-level, university/research-level document.</strong><br/>
-It is <strong>much longer</strong>, <strong>more detailed</strong>, includes <strong>examples</strong>, <strong>code</strong>, <strong>graphs</strong>, <strong>mathematical derivations</strong>, and <strong>real-world reflections</strong>.</p>
-<hr/>
-<p>Would you also like me to:
-- Add an <strong>appendix</strong> where I derive <strong>Berry-Esseen bounds</strong>?
-- Simulate an example where the <strong>CLT fails</strong> (like sampling from a <strong>Cauchy distribution</strong>)?
-- Add a <strong>Monte Carlo simulation</strong> to show CLT visually with random walks?</p>
-<p>Let me know! 🚀<br/>
-I can extend this even more if you want.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
