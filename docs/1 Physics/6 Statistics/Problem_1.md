@@ -224,34 +224,72 @@ While the CLT is powerful, it has limitations:
 
 ---
 
+### Monte Carlo Simulation for Random Walks
+
+A **random walk** is a process where each step is independent, and each step is drawn from a random distribution, such as \(\pm 1\). By simulating many such random walks, we can calculate the average displacement at each step and observe how the distribution of these averages converges to a normal distribution.
+
+Here’s how to implement this using Python:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set random seed for reproducibility
+np.random.seed(42)
+
+# Parameters for the simulation
+n_walks = 5000  # number of random walks
+n_steps = 100  # steps per walk
+
+# Simulating random walks
+walks = np.random.choice([-1, 1], size=(n_walks, n_steps))
+displacements = np.cumsum(walks, axis=1)
+
+# Now, calculate the sample mean for each walk at each step
+sample_means = np.mean(displacements, axis=0)
+
+# Visualizing the results
+plt.figure(figsize=(12, 6))
+
+# Plotting the distribution of the sample means after each step
+sns.histplot(sample_means, kde=True, bins=30, stat="density", color="cornflowerblue")
+
+# Add a normal distribution curve for comparison
+mu, sigma = np.mean(sample_means), np.std(sample_means)
+x = np.linspace(mu - 4*sigma, mu + 4*sigma, 100)
+plt.plot(x, 1/(sigma * np.sqrt(2 * np.pi)) * np.exp(-(x - mu)**2 / (2 * sigma**2)), 'r--', label="Normal Approximation")
+
+plt.title("Monte Carlo Simulation: Distribution of Sample Means (Random Walk)")
+plt.xlabel("Sample Mean")
+plt.ylabel("Density")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+### Explanation:
+
+1. **Random Walk Simulation**: We simulate \(5000\) random walks, each of length \(100\). At each step, the walker moves randomly either \(+1\) or \(-1\).
+   
+2. **Cumulative Sum**: The displacement after each step is calculated using `np.cumsum` (cumulative sum of steps).
+
+3. **Sample Means**: For each walk, we calculate the mean displacement after each step, which forms the basis for our "sample mean."
+
+4. **Visualization**: We plot a histogram of the sample means after each step and overlay a normal distribution for comparison.
+
+### Results Interpretation:
+
+- At the beginning (with fewer steps), the distribution of sample means will be **non-normal**, reflecting the randomness and the small sample size.
+- As the number of steps increases, the distribution of the sample means will converge to a **normal distribution**, demonstrating the Central Limit Theorem in action.
+
+This Monte Carlo approach visually reinforces the concept that regardless of the walk's randomness, the average over many walks follows a Gaussian distribution as the number of steps grows.
+
+Would you like me to add more features or explanations for this simulation?
+
 ## 11. Conclusion
 
 Through both theoretical exposition and detailed computational experiments, the Central Limit Theorem has been demonstrated as a universal and indispensable result in probability theory. Our simulations showed that even populations with highly non-normal shapes lead to normally distributed sample means when the sample size becomes large.
 
 Understanding the CLT provides crucial insight into statistical modeling, scientific experimentation, and quality assurance across various fields.
 
----
-
-## References
-
-- Casella, G., & Berger, R. L. (2002). *Statistical Inference*. Duxbury Press.
-- Wasserman, L. (2004). *All of Statistics: A Concise Course in Statistical Inference*. Springer.
-- Billingsley, P. (1995). *Probability and Measure*. Wiley.
-
----
-
-# ✅ Done
-
----
-**This is now a full, high-level, university/research-level document.**  
-It is **much longer**, **more detailed**, includes **examples**, **code**, **graphs**, **mathematical derivations**, and **real-world reflections**.
-
----
-
-Would you also like me to:
-- Add an **appendix** where I derive **Berry-Esseen bounds**?
-- Simulate an example where the **CLT fails** (like sampling from a **Cauchy distribution**)?
-- Add a **Monte Carlo simulation** to show CLT visually with random walks?
-
-Let me know! 🚀  
-I can extend this even more if you want.
