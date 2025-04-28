@@ -172,6 +172,241 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="exploring-the-central-limit-theorem-through-simulations">Exploring the Central Limit Theorem through Simulations</h1>
+<hr/>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>The <strong>Central Limit Theorem (CLT)</strong> is one of the most powerful results in probability theory and statistics. It asserts that, under fairly general conditions, the distribution of the sample mean of a large number of independent and identically distributed (i.i.d.) random variables approaches a <strong>normal distribution</strong>, regardless of the original population’s distribution. Formally, if <span class="arithmatex">\( X_1, X_2, \dots, X_n \)</span> are i.i.d. random variables with mean <span class="arithmatex">\( \mu \)</span> and finite variance <span class="arithmatex">\( \sigma^2 \)</span>, then:</p>
+<div class="arithmatex">\[
+\sqrt{n}\left( \frac{\bar{X}_n - \mu}{\sigma} \right) \xrightarrow{d} \mathcal{N}(0,1) \quad \text{as} \quad n \to \infty
+\]</div>
+<p>where <span class="arithmatex">\( \bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i \)</span> is the sample mean.</p>
+<p>The CLT underpins many statistical procedures, including hypothesis testing, confidence interval construction, and regression analysis. Despite its theoretical elegance, an intuitive understanding of the CLT is best achieved through <strong>empirical simulation</strong>.</p>
+<hr/>
+<h2 id="2-objectives">2. Objectives</h2>
+<p>This project aims to:
+- <strong>Empirically demonstrate</strong> the Central Limit Theorem through simulations.
+- <strong>Explore</strong> different population distributions: uniform, exponential, and binomial.
+- <strong>Investigate</strong> the effect of sample size and population characteristics (e.g., variance, skewness) on convergence to normality.
+- <strong>Discuss</strong> practical applications of the CLT in real-world settings.</p>
+<hr/>
+<h2 id="3-methodology">3. Methodology</h2>
+<p>We proceed through the following stages:
+- <strong>Population Generation</strong>: Simulate large populations from specified distributions.
+- <strong>Sampling</strong>: Randomly sample data and compute sample means.
+- <strong>Visualization</strong>: Plot histograms and kernel density estimates (KDE) of sampling distributions.
+- <strong>Analysis</strong>: Explore convergence behavior and practical implications.</p>
+<h3 id="31-libraries-and-environment-setup">3.1 Libraries and Environment Setup</h3>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import norm, skew, kurtosis
+
+# Ensure reproducibility
+np.random.seed(42)
+
+# Plotting style
+sns.set(style="whitegrid")
+</code></pre>
+<hr/>
+<h2 id="4-population-distributions">4. Population Distributions</h2>
+<p>We examine the CLT using the following population distributions:</p>
+<table>
+<thead>
+<tr>
+<th>Distribution</th>
+<th>Characteristics</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uniform(0,1)</td>
+<td>Symmetric, bounded, finite variance</td>
+</tr>
+<tr>
+<td>Exponential(λ=1)</td>
+<td>Highly skewed, infinite support, finite variance</td>
+</tr>
+<tr>
+<td>Binomial(n=10, p=0.5)</td>
+<td>Discrete, symmetric if <span class="arithmatex">\(p=0.5\)</span>, finite variance</td>
+</tr>
+</tbody>
+</table>
+<h3 id="41-population-generation">4.1 Population Generation</h3>
+<pre><code class="language-python"># Generate large populations (size = 100,000)
+population_size = 100_000
+
+population_uniform = np.random.uniform(0, 1, population_size)
+population_exponential = np.random.exponential(1, population_size)
+population_binomial = np.random.binomial(n=10, p=0.5, size=population_size)
+</code></pre>
+<hr/>
+<h2 id="5-sampling-and-simulation">5. Sampling and Simulation</h2>
+<p>To observe the CLT, we sample from each population:
+- <strong>Sample Sizes</strong>: <span class="arithmatex">\( n = 5, 10, 30, 50, 100 \)</span>
+- <strong>Repetitions</strong>: 5000 times per sample size.</p>
+<h3 id="51-sampling-function">5.1 Sampling Function</h3>
+<pre><code class="language-python">def simulate_sample_means(population, sample_sizes, num_samples=5000):
+    """
+    Simulates the distribution of sample means for a given population.
+
+    Args:
+    - population (np.array): The full population to sample from.
+    - sample_sizes (list of int): Different sample sizes to test.
+    - num_samples (int): Number of repetitions per sample size.
+
+    Returns:
+    - dict: Keys are sample sizes; values are arrays of sample means.
+    """
+    results = {}
+    for size in sample_sizes:
+        means = [np.mean(np.random.choice(population, size, replace=False)) for _ in range(num_samples)]
+        results[size] = np.array(means)
+    return results
+
+sample_sizes = [5, 10, 30, 50, 100]
+
+sampling_uniform = simulate_sample_means(population_uniform, sample_sizes)
+sampling_exponential = simulate_sample_means(population_exponential, sample_sizes)
+sampling_binomial = simulate_sample_means(population_binomial, sample_sizes)
+</code></pre>
+<hr/>
+<h2 id="6-visualization">6. Visualization</h2>
+<h3 id="61-plotting-function">6.1 Plotting Function</h3>
+<pre><code class="language-python">def plot_distributions(sampling_results, population_name):
+    """
+    Plots histograms and KDEs for different sample sizes.
+
+    Args:
+    - sampling_results (dict): Sample means organized by sample size.
+    - population_name (str): Title for plots.
+    """
+    fig, axes = plt.subplots(1, len(sampling_results), figsize=(24, 4))
+
+    for ax, (size, means) in zip(axes, sampling_results.items()):
+        sns.histplot(means, kde=True, stat="density", ax=ax, bins=30, color='skyblue', edgecolor='black')
+        ax.set_title(f'Sample Size = {size}')
+        ax.set_xlabel('Sample Mean')
+        ax.set_ylabel('Density')
+
+        # Overlay normal distribution for comparison
+        mu, std = np.mean(means), np.std(means)
+        x = np.linspace(mu - 4*std, mu + 4*std, 100)
+        ax.plot(x, norm.pdf(x, mu, std), 'r--', label="Normal PDF")
+        ax.legend()
+
+    plt.suptitle(f'Sampling Distributions from {population_name}', fontsize=18)
+    plt.tight_layout()
+    plt.show()
+
+# Plot results
+plot_distributions(sampling_uniform, "Uniform(0,1)")
+plot_distributions(sampling_exponential, "Exponential(λ=1)")
+plot_distributions(sampling_binomial, "Binomial(n=10, p=0.5)")
+</code></pre>
+<hr/>
+<h2 id="7-analytical-discussion">7. Analytical Discussion</h2>
+<h3 id="71-convergence-behavior">7.1 Convergence Behavior</h3>
+<ul>
+<li>
+<p><strong>Uniform Distribution</strong>:<br/>
+  Being symmetric and bounded, convergence is very rapid. Even for small samples (<span class="arithmatex">\(n=5\)</span>), the sampling distribution appears approximately normal.</p>
+</li>
+<li>
+<p><strong>Exponential Distribution</strong>:<br/>
+  Strongly right-skewed; convergence is slower. Noticeable skewness persists at small sample sizes but diminishes as <span class="arithmatex">\(n\)</span> increases.</p>
+</li>
+<li>
+<p><strong>Binomial Distribution</strong>:<br/>
+  Since <span class="arithmatex">\(n=10\)</span> and <span class="arithmatex">\(p=0.5\)</span>, the binomial distribution is already fairly symmetric, leading to relatively fast convergence.</p>
+</li>
+</ul>
+<h3 id="72-quantitative-analysis-skewness-and-kurtosis">7.2 Quantitative Analysis: Skewness and Kurtosis</h3>
+<p>We compute skewness and kurtosis to quantify convergence:</p>
+<pre><code class="language-python">def compute_statistics(sampling_results):
+    stats = []
+    for size, means in sampling_results.items():
+        stats.append({
+            "Sample Size": size,
+            "Mean": np.mean(means),
+            "Variance": np.var(means),
+            "Skewness": skew(means),
+            "Kurtosis": kurtosis(means)
+        })
+    return stats
+
+import pandas as pd
+
+# Display results
+df_uniform = pd.DataFrame(compute_statistics(sampling_uniform))
+df_exponential = pd.DataFrame(compute_statistics(sampling_exponential))
+df_binomial = pd.DataFrame(compute_statistics(sampling_binomial))
+
+print("Uniform Distribution Sampling Statistics:\n", df_uniform, "\n")
+print("Exponential Distribution Sampling Statistics:\n", df_exponential, "\n")
+print("Binomial Distribution Sampling Statistics:\n", df_binomial)
+</code></pre>
+<ul>
+<li><strong>Skewness</strong> measures asymmetry; CLT suggests skewness should decrease with sample size.</li>
+<li><strong>Kurtosis</strong> measures "tailedness"; convergence implies kurtosis approaches that of the normal distribution (kurtosis ≈ 0 after adjustment).</li>
+</ul>
+<hr/>
+<h2 id="8-practical-applications">8. Practical Applications</h2>
+<p>The CLT underlies numerous real-world methodologies:</p>
+<table>
+<thead>
+<tr>
+<th>Application Area</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estimation of Parameters</td>
+<td>Estimating average height of a population from a sample</td>
+</tr>
+<tr>
+<td>Quality Control</td>
+<td>Monitoring average defect rates in manufacturing processes</td>
+</tr>
+<tr>
+<td>Finance and Risk Management</td>
+<td>Modeling average returns of stock portfolios</td>
+</tr>
+<tr>
+<td>Medical Research</td>
+<td>Analyzing average treatment effects across clinical trial samples</td>
+</tr>
+<tr>
+<td>Machine Learning</td>
+<td>Cross-validation averaging across folds assumes approximate normality</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example 1</strong>:<br/>
+In a factory, engineers monitor the <strong>average diameter</strong> of manufactured bolts. Although individual bolt diameters may not be normally distributed, the average diameter across multiple samples follows a normal distribution, enabling <strong>control charts</strong> and <strong>process capability analysis</strong>.</p>
+<p><strong>Example 2</strong>:<br/>
+In finance, analysts model the <strong>mean returns</strong> of assets. Even though individual returns may be heavy-tailed, the average return over many days can be treated as normal for purposes like <strong>Value-at-Risk (VaR)</strong> computation.</p>
+<hr/>
+<h2 id="9-conclusion">9. Conclusion</h2>
+<p>Through extensive simulations, we have verified the fundamental predictions of the <strong>Central Limit Theorem</strong>:
+- Regardless of the underlying distribution, the sample mean tends toward a normal distribution as sample size increases.
+- Heavily skewed distributions (e.g., exponential) require larger samples for normality to emerge.
+- The variance of the sampling distribution decreases with sample size, following <span class="arithmatex">\( \sigma_{\bar{X}}^2 = \sigma^2 / n \)</span>.</p>
+<p>These results affirm the practical value of the CLT in statistics, data science, finance, manufacturing, medicine, and numerous other fields where inference from sample data is necessary.</p>
+<hr/>
+<h1 id="references">References</h1>
+<ul>
+<li>Casella, G., &amp; Berger, R. L. (2002). <em>Statistical Inference</em> (2nd ed.). Duxbury Press.</li>
+<li>Wasserman, L. (2004). <em>All of Statistics: A Concise Course in Statistical Inference</em>. Springer.</li>
+<li>Rice, J. A. (2006). <em>Mathematical Statistics and Data Analysis</em> (3rd ed.). Cengage Learning.</li>
+</ul>
+<hr/>
+<p>Would you like me also to prepare:
+- 📘 A <strong>ready-to-use Jupyter Notebook</strong> (.ipynb)?
+- 📈 A <strong>PDF export</strong> of the full Markdown + output?
+- 🎥 An <strong>animated visualization</strong> (GIF/video) showing how distributions evolve as sample size grows?</p>
+<p>Let me know! 🚀</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
