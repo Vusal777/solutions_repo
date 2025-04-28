@@ -257,6 +257,9 @@ simulate_sampling(population_uniform, "Uniform(0,1)")
 simulate_sampling(population_exponential, "Exponential(λ=1)")
 simulate_sampling(population_binomial, "Binomial(n=10, p=0.5)")
 </code></pre>
+<p><img alt="alt text" src="../image.png"/>
+<img alt="alt text" src="../image-1.png"/>
+<img alt="alt text" src="../image-2.png"/></p>
 <hr/>
 <h2 id="6-results-and-analysis">6. Results and Analysis</h2>
 <h3 id="61-uniform-distribution-results">6.1. Uniform Distribution Results</h3>
@@ -311,6 +314,7 @@ plt.grid(True, which="both")
 plt.show()
 </code></pre>
 <p>The empirical results confirm that variance decreases proportionally to <span class="arithmatex">\( 1/n \)</span>.</p>
+<p><img alt="alt text" src="../image-3.png"/></p>
 <hr/>
 <h2 id="8-additional-examples">8. Additional Examples</h2>
 <h3 id="81-physical-measurement-errors">8.1. Physical Measurement Errors</h3>
@@ -375,6 +379,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 </code></pre>
+<p><img alt="alt text" src="../image-4.png"/></p>
 <h3 id="explanation">Explanation:</h3>
 <ol>
 <li>
@@ -396,7 +401,6 @@ plt.show()
 <li>As the number of steps increases, the distribution of the sample means will converge to a <strong>normal distribution</strong>, demonstrating the Central Limit Theorem in action.</li>
 </ul>
 <p>This Monte Carlo approach visually reinforces the concept that regardless of the walk's randomness, the average over many walks follows a Gaussian distribution as the number of steps grows.</p>
-<p>Would you like me to add more features or explanations for this simulation?</p>
 <h2 id="11-conclusion">11. Conclusion</h2>
 <p>Through both theoretical exposition and detailed computational experiments, the Central Limit Theorem has been demonstrated as a universal and indispensable result in probability theory. Our simulations showed that even populations with highly non-normal shapes lead to normally distributed sample means when the sample size becomes large.</p>
 <p>Understanding the CLT provides crucial insight into statistical modeling, scientific experimentation, and quality assurance across various fields.</p>
