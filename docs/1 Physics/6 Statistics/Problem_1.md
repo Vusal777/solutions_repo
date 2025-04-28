@@ -6,13 +6,13 @@
 
 ## 1. Introduction
 
-The **Central Limit Theorem (CLT)** is one of the most powerful results in probability theory and statistics. It asserts that, under fairly general conditions, the distribution of the sample mean of a large number of independent and identically distributed (i.i.d.) random variables approaches a **normal distribution**, regardless of the original population’s distribution. Formally, if \( X_1, X_2, \dots, X_n \) are i.i.d. random variables with mean \( \mu \) and finite variance \( \sigma^2 \), then:
+The **Central Limit Theorem (CLT)** is one of the most powerful results in probability theory and statistics. It asserts that, under fairly general conditions, the distribution of the sample mean of a large number of independent and identically distributed (i.i.d.) random variables approaches a **normal distribution**, regardless of the original population’s distribution. Formally, if $X_1, X_2, \dots, X_n$ are i.i.d. random variables with mean $ \mu $ and finite variance $\sigma^2$, then:
 
 $$
 \sqrt{n}\left( \frac{\bar{X}_n - \mu}{\sigma} \right) \xrightarrow{d} \mathcal{N}(0,1) \quad \text{as} \quad n \to \infty
 $$
 
-where \( \bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i \) is the sample mean.
+where $ \bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i $ is the sample mean.
 
 The CLT underpins many statistical procedures, including hypothesis testing, confidence interval construction, and regression analysis. Despite its theoretical elegance, an intuitive understanding of the CLT is best achieved through **empirical simulation**.
 
