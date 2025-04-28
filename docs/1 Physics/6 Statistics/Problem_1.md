@@ -199,6 +199,48 @@ When measuring a physical quantity (e.g., mass of an object) multiple times, ind
 
 In finance, daily returns on a stock are highly variable. However, the average return over many days tends toward normality, making techniques like Value at Risk (VaR) or Black-Scholes modeling mathematically justifiable.
 
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set parameters
+n_simulations = 10000  # number of simulations (paths)
+n_days = 252  # trading days in a year
+mu = 0.0005  # expected daily return
+sigma = 0.02  # daily volatility (standard deviation)
+
+# Simulate daily returns for each simulation (Geometric Brownian Motion model)
+np.random.seed(42)
+daily_returns = np.random.normal(mu, sigma, (n_simulations, n_days))
+
+# Calculate cumulative returns for each simulation (representing stock price paths)
+cumulative_returns = np.cumsum(daily_returns, axis=1)
+
+# Calculate the sample mean return over increasing periods
+sample_means = np.mean(cumulative_returns, axis=0)
+
+# Visualizing the distribution of sample means
+plt.figure(figsize=(10, 6))
+
+# Plotting histogram of sample means after each day
+sns.histplot(sample_means, kde=True, bins=50, stat="density", color="dodgerblue")
+
+# Overlay a normal distribution curve for comparison
+mu_sample, sigma_sample = np.mean(sample_means), np.std(sample_means)
+x = np.linspace(mu_sample - 4 * sigma_sample, mu_sample + 4 * sigma_sample, 100)
+plt.plot(x, 1 / (sigma_sample * np.sqrt(2 * np.pi)) * np.exp(-(x - mu_sample) ** 2 / (2 * sigma_sample ** 2)), 'r--', label="Normal Approximation")
+
+# Title and labels
+plt.title("Daily Stock Return Simulation and Convergence to Normal Distribution")
+plt.xlabel("Average Daily Return")
+plt.ylabel("Density")
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+![alt text](image-5.png)
 ---
 
 ### 8.3. Manufacturing Quality Control
