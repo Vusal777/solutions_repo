@@ -114,7 +114,9 @@ simulate_sampling(population_uniform, "Uniform(0,1)")
 simulate_sampling(population_exponential, "Exponential(λ=1)")
 simulate_sampling(population_binomial, "Binomial(n=10, p=0.5)")
 ```
-
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
 ---
 
 ## 6. Results and Analysis
@@ -180,6 +182,8 @@ plt.show()
 ```
 
 The empirical results confirm that variance decreases proportionally to \( 1/n \).
+
+![alt text](image-3.png)
 
 ---
 
@@ -267,6 +271,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 ```
+![alt text](image-4.png)
 
 ### Explanation:
 
@@ -285,7 +290,6 @@ plt.show()
 
 This Monte Carlo approach visually reinforces the concept that regardless of the walk's randomness, the average over many walks follows a Gaussian distribution as the number of steps grows.
 
-Would you like me to add more features or explanations for this simulation?
 
 ## 11. Conclusion
 
