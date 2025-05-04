@@ -219,6 +219,10 @@ plt.show()
 
 The Buffon method exhibits similar $O(1/\sqrt{N})$ convergence but shows higher variance due to its binary outcome.
 
+### 3.5 Simulation
+![alt text](image-8.png)
+![alt text](image-9.png)
+
 ---
 
 ## 4. Comparative Analysis
