@@ -1,4 +1,4 @@
-# Problem 1
+# Problem 2
 
 # Estimating π Using Monte Carlo Methods: A Comparative Study of Circle-Based and Buffon’s Needle Approaches
 
