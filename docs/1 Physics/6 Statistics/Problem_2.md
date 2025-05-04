@@ -115,10 +115,10 @@ plt.show()
 The error decreases approximately as $O(1/\sqrt{N})$, consistent with the theoretical convergence rate of Monte Carlo methods.
 
 ### 2.5 Simulation
-![alt text](image-6.png)
+<img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/1*gX7sc-S-ik3t5A-Y1bdysA.gif" alt="Funny GIF" width="400">
+
 ![alt text](image-7.png)
-![alt text](image-10.png)
-![alt text](image-11.png)
+
 ---
 
 ## 3. Buffon’s Needle Method
