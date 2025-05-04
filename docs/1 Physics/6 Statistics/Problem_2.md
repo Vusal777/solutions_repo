@@ -117,7 +117,8 @@ The error decreases approximately as $O(1/\sqrt{N})$, consistent with the theore
 ### 2.5 Simulation
 ![alt text](image-6.png)
 ![alt text](image-7.png)
-
+![alt text](image-10.png)
+![alt text](image-11.png)
 ---
 
 ## 3. Buffon’s Needle Method
