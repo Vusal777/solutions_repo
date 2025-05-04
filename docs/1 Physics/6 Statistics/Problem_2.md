@@ -1,6 +1,7 @@
 # Problem 2
 
 # Estimating π Using Monte Carlo Methods: A Comparative Study of Circle-Based and Buffon’s Needle Approaches
+---
 
 ## Abstract
 
@@ -112,6 +113,10 @@ plt.show()
 ```
 
 The error decreases approximately as $O(1/\sqrt{N})$, consistent with the theoretical convergence rate of Monte Carlo methods.
+
+### 2.5 Simulation
+![alt text](image-6.png)
+![alt text](image-7.png)
 
 ---
 
