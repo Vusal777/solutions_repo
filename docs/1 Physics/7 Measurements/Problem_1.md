@@ -26,9 +26,9 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
 * Fix the string to a sturdy support and attach the weight at the other end.
 * Measure the length $L$ from the suspension point to the center of the mass.
 * Estimate uncertainty in length:
-
-  $\Delta L = \frac{\text{ruler resolution}}{2}$
-
+  <div align="center">
+  $$\Delta L = \frac{\text{ruler resolution}}{2}$$
+  </div>
 ### 2. Data Collection
 
 * Displace the pendulum to a small angle (≤15°) and release it.
