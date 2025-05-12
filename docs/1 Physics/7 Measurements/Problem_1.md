@@ -53,7 +53,7 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
 
 * Compute period:
 
-  $$T = \frac{\overline{T}_{10}}{10}, \quad \Delta T = \frac{\Delta T_{10}}{10}$$
+  $T = \frac{\overline{T}_{10}}{10}, \quad \Delta T = \frac{\Delta T_{10}}{10}$
 * Compute gravitational acceleration:
 
   $$
