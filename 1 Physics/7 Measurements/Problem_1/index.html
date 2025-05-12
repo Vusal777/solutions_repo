@@ -172,118 +172,232 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<p>Absolutely! Here's a well-structured, article-style write-up based on your task: <strong>"Measuring Earth's Gravitational Acceleration with a Pendulum"</strong>. It's written in a clear academic tone suitable for a report or publication-style assignment.</p>
-<hr/>
-<h1 id="measuring-earths-gravitational-acceleration-with-a-pendulum">Measuring Earth's Gravitational Acceleration with a Pendulum</h1>
-<h3 id="abstract"><strong>Abstract</strong></h3>
-<p>The acceleration due to gravity (<strong>g</strong>) is a fundamental constant central to classical mechanics. In this experiment, we determine the local value of <strong>g</strong> using a simple pendulum and analyze the impact of measurement uncertainties on the result. This classic physics experiment provides insights into the importance of precision and error propagation in experimental work.</p>
-<hr/>
-<h3 id="introduction"><strong>Introduction</strong></h3>
-<p>Gravitational acceleration, commonly denoted as <strong>g</strong>, plays a critical role in various physical phenomena, from planetary motion to engineering applications. While the standard accepted value of <strong>g</strong> at Earth's surface is approximately <strong>9.81 m/s²</strong>, its local value may vary slightly depending on altitude, latitude, and geological composition. A simple and widely used method to experimentally determine <strong>g</strong> is through the analysis of a simple pendulum’s periodic motion.</p>
-<p>A simple pendulum, when displaced by a small angle (less than 15°), behaves like a harmonic oscillator, and its period is governed by the formula:</p>
-<div class="arithmatex">\[
-T = 2\pi\sqrt{\frac{L}{g}}
-\]</div>
-<p>By measuring the pendulum length <strong>L</strong> and the oscillation period <strong>T</strong>, one can solve for <strong>g</strong>. The accuracy of this measurement, however, is highly dependent on the precision of length and time measurements. This experiment emphasizes careful data collection and rigorous uncertainty analysis.</p>
-<hr/>
-<h3 id="materials-and-methods"><strong>Materials and Methods</strong></h3>
-<h4 id="materials"><strong>Materials</strong></h4>
+<h1 id="measuring-earths-gravitational-acceleration-using-a-simple-pendulum">🪐 Measuring Earth's Gravitational Acceleration Using a Simple Pendulum</h1>
+<h2 id="motivation">✨ Motivation</h2>
+<p>The acceleration due to gravity (<strong>g</strong>) is a fundamental physical constant with a typical value of <strong>9.81 m/s²</strong> near the Earth’s surface. Accurate knowledge of this constant is crucial for applications in physics, engineering, geophysics, and many other fields. One of the simplest and most elegant methods to experimentally measure <strong>g</strong> is using a <strong>simple pendulum</strong>, exploiting the relationship between the period of oscillation and the gravitational field.</p>
+<p>This exercise aims to:</p>
 <ul>
-<li>String (approximately 1.0 to 1.5 meters)</li>
-<li>Small mass (e.g., bag of coins or keychain)</li>
-<li>Stopwatch (or a smartphone timer)</li>
-<li>Measuring tape or ruler with millimeter resolution</li>
+<li>Determine <strong>g</strong> using a pendulum.</li>
+<li>Analyze and propagate uncertainties in the experiment.</li>
+<li>Practice data analysis and visualization using Python.</li>
 </ul>
-<h4 id="experimental-setup"><strong>Experimental Setup</strong></h4>
-<p>The pendulum was constructed by attaching a small weight to a string and suspending it from a fixed support. The length <strong>L</strong> was measured from the suspension point to the center of mass of the weight using a ruler with a 1 mm resolution, giving an uncertainty in length:</p>
-<div class="arithmatex">\[
-\Delta L = \frac{\text{Ruler resolution}}{2} = 0.0005 \, \text{m}
-\]</div>
-<h4 id="procedure"><strong>Procedure</strong></h4>
-<p>The pendulum was displaced by a small angle (less than 15°) and released. The time for 10 full oscillations was measured using a stopwatch. This process was repeated 10 times to obtain a reliable data set. The average time <strong>T̄₁₀</strong>, standard deviation <strong>σₜ</strong>, and uncertainty in the mean time <strong>ΔT₁₀</strong> were calculated using:</p>
-<div class="arithmatex">\[
-\Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}, \quad \text{with } n = 10
-\]</div>
-<p>The period of one oscillation was determined by dividing the average time by 10. This period was then used to compute the local value of <strong>g</strong>, followed by the propagation of uncertainties.</p>
 <hr/>
-<h3 id="calculations"><strong>Calculations</strong></h3>
-<h4 id="1-period-of-oscillation"><strong>1. Period of Oscillation</strong></h4>
-<div class="arithmatex">\[
-T = \frac{\overline{T}_{10}}{10}, \quad \Delta T = \frac{\Delta T_{10}}{10}
-\]</div>
-<h4 id="2-acceleration-due-to-gravity"><strong>2. Acceleration Due to Gravity</strong></h4>
-<div class="arithmatex">\[
-g = \frac{4\pi^2 L}{T^2}
-\]</div>
-<h4 id="3-propagation-of-uncertainty"><strong>3. Propagation of Uncertainty</strong></h4>
-<div class="arithmatex">\[
-\Delta g = g \cdot \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2 \cdot \frac{\Delta T}{T}\right)^2}
-\]</div>
+<h2 id="materials">🧪 Materials</h2>
+<ul>
+<li>A string (1.0–1.5 meters long)</li>
+<li>A small dense weight (e.g., a metal keychain or bag of coins)</li>
+<li>A stopwatch or smartphone timer</li>
+<li>A ruler or tape measure (preferably with mm precision)</li>
+</ul>
 <hr/>
-<h3 id="results"><strong>Results</strong></h3>
-<p>A summary of the collected and computed data:</p>
+<h2 id="procedure">⚙️ Procedure</h2>
+<h3 id="1-setup">1. Setup</h3>
+<ul>
+<li>Tie one end of the string to a support and attach the mass to the other end.</li>
+<li>Measure the length <span class="arithmatex">\(L\)</span> from the suspension point to the center of the mass. Use a ruler or tape measure.</li>
+<li>Estimate the uncertainty in the length:</li>
+</ul>
+<p>$$
+  \Delta L = \frac{\text{Resolution of the ruler}}{2}
+  $$</p>
+<h3 id="2-data-collection">2. Data Collection</h3>
+<ul>
+<li>Displace the pendulum by less than 15° to minimize non-linear effects.</li>
+<li>Measure the total time for <strong>10 complete oscillations</strong> (back and forth) using a stopwatch.</li>
+<li>Repeat this 10 times to get a set of values <span class="arithmatex">\(T_{10}^{(i)}\)</span>.</li>
+</ul>
+<h3 id="3-analyze-data">3. Analyze Data</h3>
+<ul>
+<li>Compute the average time for 10 oscillations:</li>
+</ul>
+<p>$$
+  \overline{T}<em>{10} = \frac{1}{n} \sum</em>{i=1}^{n} T_{10}^{(i)}
+  $$
+* Compute the standard deviation <span class="arithmatex">\(\sigma_T\)</span>.
+* Calculate the uncertainty in the mean:</p>
+<p>$$
+  \Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}
+  $$</p>
+<h3 id="4-compute-period-and-g">4. Compute Period and g</h3>
+<ul>
+<li>Compute the period:</li>
+</ul>
+<p>$$
+  T = \frac{\overline{T}<em>{10}}{10}, \quad \Delta T = \frac{\Delta T</em>{10}}{10}
+  $$
+* Calculate <strong>g</strong>:</p>
+<p>$$
+  g = \frac{4\pi^2 L}{T^2}
+  $$
+* Propagate uncertainties:</p>
+<p>$$
+  \Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\frac{\Delta T}{T}\right)^2}
+  $$</p>
+<hr/>
+<h2 id="python-code-for-simulation-visualization">📊 Python Code for Simulation &amp; Visualization</h2>
+<p>The following Python code simulates the pendulum experiment and visualizes:</p>
+<ul>
+<li>Variations in timing due to human error.</li>
+<li>How these variations influence the calculated value of <strong>g</strong>.</li>
+</ul>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+L = 1.00  # Length of the pendulum in meters
+delta_L = 0.0005  # Uncertainty in length (half the resolution of a mm ruler)
+true_g = 9.81  # True value of g for reference
+
+# Simulate timing for 10 sets of 10 oscillations
+np.random.seed(42)
+true_T = 2 * np.pi * np.sqrt(L / true_g)  # True period
+n_trials = 10
+n_oscillations = 10
+
+# Simulate human timing uncertainty (e.g., 0.2s std dev over 10 oscillations)
+simulated_T10 = np.random.normal(loc=true_T * n_oscillations, scale=0.2, size=n_trials)
+mean_T10 = np.mean(simulated_T10)
+std_T10 = np.std(simulated_T10, ddof=1)
+delta_T10 = std_T10 / np.sqrt(n_trials)
+
+# Compute single period and uncertainty
+T = mean_T10 / n_oscillations
+delta_T = delta_T10 / n_oscillations
+
+# Calculate g and its uncertainty
+g_measured = 4 * np.pi**2 * L / T**2
+delta_g = g_measured * np.sqrt((delta_L / L)**2 + (2 * delta_T / T)**2)
+
+# Print results
+print(f"Measured g = {g_measured:.4f} ± {delta_g:.4f} m/s²")
+
+# Visualization
+fig, axs = plt.subplots(2, 1, figsize=(10, 8), gridspec_kw={'height_ratios': [1, 1.2]})
+plt.subplots_adjust(hspace=0.4)
+
+# Plot timing measurements
+axs[0].bar(range(1, n_trials + 1), simulated_T10, color='skyblue', edgecolor='black')
+axs[0].axhline(mean_T10, color='red', linestyle='--', label=f'Mean = {mean_T10:.2f}s')
+axs[0].set_title('Measured Time for 10 Oscillations (T₁₀)')
+axs[0].set_xlabel('Trial Number')
+axs[0].set_ylabel('Time (s)')
+axs[0].legend()
+axs[0].grid(True)
+
+# Plot g with uncertainty
+axs[1].errorbar(1, g_measured, yerr=delta_g, fmt='o', capsize=10, label=f'Measured g = {g_measured:.2f} ± {delta_g:.2f} m/s²')
+axs[1].axhline(true_g, color='green', linestyle='--', label='True g = 9.81 m/s²')
+axs[1].set_xlim(0.5, 1.5)
+axs[1].set_ylim(9.6, 10.1)
+axs[1].set_title('Calculated Gravitational Acceleration')
+axs[1].set_ylabel('g (m/s²)')
+axs[1].set_xticks([])
+axs[1].legend()
+axs[1].grid(True)
+
+plt.suptitle("Pendulum Experiment: Timing and Gravitational Acceleration", fontsize=16)
+plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+plt.savefig('pendulum_g_visualization.png', dpi=300)
+plt.show()
+</code></pre>
+<hr/>
+<h2 id="sample-tabulated-data-markdown-ready">🧾 Sample Tabulated Data (Markdown-Ready)</h2>
 <table>
 <thead>
 <tr>
-<th>Quantity</th>
-<th>Value</th>
+<th>Trial</th>
+<th>T₁₀ (s)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pendulum length, <strong>L</strong></td>
-<td>1.000 m ± 0.0005 m</td>
+<td>1</td>
+<td>20.12</td>
 </tr>
 <tr>
-<td>Mean time for 10 oscillations, <strong>T̄₁₀</strong></td>
-<td>20.085 s</td>
+<td>2</td>
+<td>20.01</td>
 </tr>
 <tr>
-<td>Standard deviation, <strong>σₜ</strong></td>
-<td>0.030 s</td>
+<td>3</td>
+<td>19.95</td>
 </tr>
 <tr>
-<td>Uncertainty in mean, <strong>ΔT₁₀</strong></td>
-<td>0.0095 s</td>
+<td>4</td>
+<td>20.20</td>
 </tr>
 <tr>
-<td>Period, <strong>T</strong></td>
-<td>2.0085 s ± 0.00095 s</td>
+<td>5</td>
+<td>20.04</td>
 </tr>
 <tr>
-<td>Calculated <strong>g</strong></td>
-<td>9.81 m/s²</td>
+<td>6</td>
+<td>19.88</td>
 </tr>
 <tr>
-<td>Uncertainty in <strong>g</strong>, <strong>Δg</strong></td>
-<td>±0.01 m/s²</td>
+<td>7</td>
+<td>20.17</td>
+</tr>
+<tr>
+<td>8</td>
+<td>20.22</td>
+</tr>
+<tr>
+<td>9</td>
+<td>20.00</td>
+</tr>
+<tr>
+<td>10</td>
+<td>20.08</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Length</strong>: L = 1.00 ± 0.0005 m
+<strong>Mean T₁₀</strong>: 20.07 s
+<strong>Standard Deviation</strong>: 0.11 s
+<strong>ΔT₁₀</strong>: 0.035 s
+<strong>Period (T)</strong>: 2.007 s ± 0.0035 s
+<strong>Calculated g</strong>: 9.79 ± 0.04 m/s²</p>
 <hr/>
-<h3 id="discussion"><strong>Discussion</strong></h3>
-<h4 id="measurement-accuracy"><strong>Measurement Accuracy</strong></h4>
-<p>The experiment produced a gravitational acceleration value of <strong>9.81 ± 0.01 m/s²</strong>, which is remarkably close to the standard value. This indicates that with careful setup and timing, a simple pendulum can yield accurate results for <strong>g</strong>.</p>
-<h4 id="sources-of-uncertainty"><strong>Sources of Uncertainty</strong></h4>
-<ul>
+<h2 id="discussion-sources-of-uncertainty">📌 Discussion &amp; Sources of Uncertainty</h2>
+<ol>
 <li>
-<p><strong>Length Measurement (ΔL):</strong>
-  The precision of the length measurement was limited by the ruler’s resolution. Since length appears in the numerator of the formula for <strong>g</strong>, this contributed directly to the result’s accuracy.</p>
+<p><strong>Measurement Resolution</strong>:</p>
 </li>
 <li>
-<p><strong>Timing Variability (ΔT):</strong>
-  Timing was the largest source of uncertainty, affected by human reaction time and inconsistency in stopwatch operation. To reduce these effects, the measurement was averaged over 10 trials and 10 oscillations.</p>
+<p>A typical ruler’s resolution (1 mm) limits the precision in measuring the length.</p>
 </li>
-</ul>
-<h4 id="assumptions-and-limitations"><strong>Assumptions and Limitations</strong></h4>
-<ul>
-<li>The pendulum is assumed to be ideal (massless string, point mass, negligible air resistance).</li>
-<li>The small-angle approximation is valid since the angle was kept under 15°.</li>
-<li>The center of mass of the pendulum bob was estimated accurately, but minor deviations could have occurred.</li>
-</ul>
+<li>
+<p>Taking uncertainty as half the smallest division gives a more conservative estimate.</p>
+</li>
+<li>
+<p><strong>Human Reaction Time</strong>:</p>
+</li>
+<li>
+<p>Stopwatch timing is affected by human response delays.</p>
+</li>
+<li>
+<p>Measuring 10 oscillations instead of 1 helps reduce the impact of this error.</p>
+</li>
+<li>
+<p><strong>Air Resistance and Swing Angle</strong>:</p>
+</li>
+<li>
+<p>The formula for <strong>g</strong> assumes small angles (θ &lt; 15°).</p>
+</li>
+<li>
+<p>Deviations from this introduce systematic errors.</p>
+</li>
+<li>
+<p><strong>Pendulum Length Assumption</strong>:</p>
+</li>
+<li>
+<p>The length must be measured to the center of mass of the pendulum bob, which can be imprecise if the object isn't symmetric.</p>
+</li>
+</ol>
 <hr/>
-<h3 id="conclusion"><strong>Conclusion</strong></h3>
-<p>This experiment successfully measured the local gravitational acceleration using a simple pendulum. The calculated value of <strong>g = 9.81 ± 0.01 m/s²</strong> aligns with the standard value, demonstrating the effectiveness of the method. Additionally, the exercise highlights the importance of uncertainty analysis in obtaining reliable experimental results. Simple tools, when used thoughtfully and with attention to precision, can provide deep insight into fundamental constants of nature.</p>
+<h2 id="conclusion">✅ Conclusion</h2>
+<p>This experiment provides a reasonably accurate value of <strong>g</strong> using very simple materials. By combining careful measurement, repeated trials, and uncertainty analysis — and visualizing the results — we gain a deeper appreciation of how precise physics experiments must be to achieve reliable results.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
