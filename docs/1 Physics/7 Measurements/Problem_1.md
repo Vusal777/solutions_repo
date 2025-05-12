@@ -58,8 +58,9 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
 ### 4. Final Calculations
 
 * Compute period:
-
+  <div align="center">
   $T = \frac{\overline{T}_{10}}{10}, \quad \Delta T = \frac{\Delta T_{10}}{10}$
+  </div>
 * Compute gravitational acceleration:
 
   $$
