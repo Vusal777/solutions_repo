@@ -39,7 +39,7 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
 
 * Compute average time for 10 oscillations:
 
-  $$\overline{T}_{10} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)}$$
+  $\overline{T}_{10} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)}$ \n
 * Standard deviation of the 10 values:
 
   $$ \sigma_T = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (T_{10}^{(i)} - \overline{T}_{10})^2} $$
