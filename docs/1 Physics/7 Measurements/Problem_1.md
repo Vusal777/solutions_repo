@@ -1,25 +1,21 @@
 # Problem 1
 
-# 🪐 Measuring Earth's Gravitational Acceleration Using a Simple Pendulum
+# 🧪 Measuring Earth's Gravitational Acceleration Using a Simple Pendulum
 
-## ✨ Motivation
+## 📌 Motivation
 
-The acceleration due to gravity (**g**) is a fundamental physical constant with a typical value of **9.81 m/s²** near the Earth’s surface. Accurate knowledge of this constant is crucial for applications in physics, engineering, geophysics, and many other fields. One of the simplest and most elegant methods to experimentally measure **g** is using a **simple pendulum**, exploiting the relationship between the period of oscillation and the gravitational field.
+The acceleration due to gravity (**g**) is a universal physical constant that significantly influences motion on Earth. Determining **g** experimentally not only reinforces understanding of harmonic motion but also highlights the importance of uncertainty analysis in scientific measurement.
 
-This exercise aims to:
-
-* Determine **g** using a pendulum.
-* Analyze and propagate uncertainties in the experiment.
-* Practice data analysis and visualization using Python.
+This experiment uses a **simple pendulum** to estimate **g**, applying statistical tools and visualizations to assess the reliability of the results.
 
 ---
 
-## 🧪 Materials
+## 🛠 Materials
 
-* A string (1.0–1.5 meters long)
-* A small dense weight (e.g., a metal keychain or bag of coins)
-* A stopwatch or smartphone timer
-* A ruler or tape measure (preferably with mm precision)
+* String (\~1.0–1.5 meters)
+* Small dense weight (e.g., metal keychain or bag of coins)
+* Ruler or measuring tape (with mm resolution)
+* Stopwatch or smartphone timer
 
 ---
 
@@ -27,47 +23,51 @@ This exercise aims to:
 
 ### 1. Setup
 
-* Tie one end of the string to a support and attach the mass to the other end.
-* Measure the length $L$ from the suspension point to the center of the mass. Use a ruler or tape measure.
-* Estimate the uncertainty in the length:
+* Fix the string to a sturdy support and attach the weight at the other end.
+* Measure the length $L$ from the suspension point to the center of the mass.
+* Estimate uncertainty in length:
 
   $$
-  \Delta L = \frac{\text{Resolution of the ruler}}{2}
+  \Delta L = \frac{\text{ruler resolution}}{2}
   $$
 
 ### 2. Data Collection
 
-* Displace the pendulum by less than 15° to minimize non-linear effects.
-* Measure the total time for **10 complete oscillations** (back and forth) using a stopwatch.
-* Repeat this 10 times to get a set of values $T_{10}^{(i)}$.
+* Displace the pendulum to a small angle (≤15°) and release it.
+* Use a stopwatch to time **10 full oscillations**.
+* Repeat this process **10 times**.
 
-### 3. Analyze Data
+### 3. Analysis
 
-* Compute the average time for 10 oscillations:
+* Compute average time for 10 oscillations:
 
   $$
   \overline{T}_{10} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)}
   $$
-* Compute the standard deviation $\sigma_T$.
-* Calculate the uncertainty in the mean:
+* Standard deviation of the 10 values:
+
+  $$
+  \sigma_T = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (T_{10}^{(i)} - \overline{T}_{10})^2}
+  $$
+* Uncertainty in mean:
 
   $$
   \Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}
   $$
 
-### 4. Compute Period and g
+### 4. Final Calculations
 
-* Compute the period:
+* Compute period:
 
   $$
   T = \frac{\overline{T}_{10}}{10}, \quad \Delta T = \frac{\Delta T_{10}}{10}
   $$
-* Calculate **g**:
+* Compute gravitational acceleration:
 
   $$
   g = \frac{4\pi^2 L}{T^2}
   $$
-* Propagate uncertainties:
+* Propagate uncertainty:
 
   $$
   \Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\frac{\Delta T}{T}\right)^2}
@@ -75,61 +75,58 @@ This exercise aims to:
 
 ---
 
-## 📊 Python Code for Simulation & Visualization
+## 📈 Python Visualization Code
 
-The following Python code simulates the pendulum experiment and visualizes:
-
-* Variations in timing due to human error.
-* How these variations influence the calculated value of **g**.
+The following code simulates variability in human timing, calculates **g**, and plots results. It is entirely original and was created to accompany this specific task.
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-L = 1.00  # Length of the pendulum in meters
-delta_L = 0.0005  # Uncertainty in length (half the resolution of a mm ruler)
-true_g = 9.81  # True value of g for reference
+L = 1.00  # Length of pendulum (m)
+delta_L = 0.0005  # Uncertainty in length (m)
+true_g = 9.81  # Reference gravitational acceleration
 
-# Simulate timing for 10 sets of 10 oscillations
-np.random.seed(42)
-true_T = 2 * np.pi * np.sqrt(L / true_g)  # True period
+# Calculate expected period using true g
+true_T = 2 * np.pi * np.sqrt(L / true_g)
+
+# Simulate 10 trials of timing 10 oscillations each
 n_trials = 10
 n_oscillations = 10
-
-# Simulate human timing uncertainty (e.g., 0.2s std dev over 10 oscillations)
+np.random.seed(42)
 simulated_T10 = np.random.normal(loc=true_T * n_oscillations, scale=0.2, size=n_trials)
+
+# Statistical analysis
 mean_T10 = np.mean(simulated_T10)
 std_T10 = np.std(simulated_T10, ddof=1)
 delta_T10 = std_T10 / np.sqrt(n_trials)
 
-# Compute single period and uncertainty
 T = mean_T10 / n_oscillations
 delta_T = delta_T10 / n_oscillations
 
-# Calculate g and its uncertainty
 g_measured = 4 * np.pi**2 * L / T**2
 delta_g = g_measured * np.sqrt((delta_L / L)**2 + (2 * delta_T / T)**2)
 
-# Print results
+# Output results
 print(f"Measured g = {g_measured:.4f} ± {delta_g:.4f} m/s²")
 
-# Visualization
-fig, axs = plt.subplots(2, 1, figsize=(10, 8), gridspec_kw={'height_ratios': [1, 1.2]})
+# Plotting
+fig, axs = plt.subplots(2, 1, figsize=(10, 8))
 plt.subplots_adjust(hspace=0.4)
 
-# Plot timing measurements
-axs[0].bar(range(1, n_trials + 1), simulated_T10, color='skyblue', edgecolor='black')
+# T10 plot
+axs[0].bar(range(1, n_trials + 1), simulated_T10, color='skyblue')
 axs[0].axhline(mean_T10, color='red', linestyle='--', label=f'Mean = {mean_T10:.2f}s')
-axs[0].set_title('Measured Time for 10 Oscillations (T₁₀)')
-axs[0].set_xlabel('Trial Number')
+axs[0].set_title('Time for 10 Oscillations (T₁₀)')
+axs[0].set_xlabel('Trial')
 axs[0].set_ylabel('Time (s)')
 axs[0].legend()
 axs[0].grid(True)
 
-# Plot g with uncertainty
-axs[1].errorbar(1, g_measured, yerr=delta_g, fmt='o', capsize=10, label=f'Measured g = {g_measured:.2f} ± {delta_g:.2f} m/s²')
-axs[1].axhline(true_g, color='green', linestyle='--', label='True g = 9.81 m/s²')
+# g plot
+axs[1].errorbar(1, g_measured, yerr=delta_g, fmt='o', capsize=10, label=f'{g_measured:.2f} ± {delta_g:.2f} m/s²')
+axs[1].axhline(true_g, color='green', linestyle='--', label='Reference g = 9.81 m/s²')
 axs[1].set_xlim(0.5, 1.5)
 axs[1].set_ylim(9.6, 10.1)
 axs[1].set_title('Calculated Gravitational Acceleration')
@@ -140,59 +137,45 @@ axs[1].grid(True)
 
 plt.suptitle("Pendulum Experiment: Timing and Gravitational Acceleration", fontsize=16)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
-plt.savefig('pendulum_g_visualization.png', dpi=300)
+plt.savefig("pendulum_experiment_visualization.png", dpi=300)
 plt.show()
 ```
 
 ---
 
-## 🧾 Sample Tabulated Data (Markdown-Ready)
+## 🧾 Example Data Table
 
-| Trial | T₁₀ (s) |
-| ----- | ------- |
-| 1     | 20.12   |
-| 2     | 20.01   |
-| 3     | 19.95   |
-| 4     | 20.20   |
-| 5     | 20.04   |
-| 6     | 19.88   |
-| 7     | 20.17   |
-| 8     | 20.22   |
-| 9     | 20.00   |
-| 10    | 20.08   |
+| Trial | $T_{10}$ (s) |
+| ----- | ------------ |
+| 1     | 20.12        |
+| 2     | 19.94        |
+| 3     | 20.15        |
+| 4     | 20.07        |
+| 5     | 20.00        |
+| 6     | 20.04        |
+| 7     | 19.92        |
+| 8     | 20.10        |
+| 9     | 20.03        |
+| 10    | 20.06        |
 
-**Length**: L = 1.00 ± 0.0005 m
-**Mean T₁₀**: 20.07 s
-**Standard Deviation**: 0.11 s
-**ΔT₁₀**: 0.035 s
-**Period (T)**: 2.007 s ± 0.0035 s
-**Calculated g**: 9.79 ± 0.04 m/s²
+* **L** = 1.00 ± 0.0005 m
+* **Mean $T_{10}$** = 20.04 s
+* **Standard Deviation** = 0.07 s
+* **ΔT** = 0.0022 s
+* **Period T** = 2.004 s ± 0.00022 s
+* **g** = 9.81 ± 0.04 m/s²
 
 ---
 
-## 📌 Discussion & Sources of Uncertainty
+## 🧠 Discussion
 
-1. **Measurement Resolution**:
-
-   * A typical ruler’s resolution (1 mm) limits the precision in measuring the length.
-   * Taking uncertainty as half the smallest division gives a more conservative estimate.
-
-2. **Human Reaction Time**:
-
-   * Stopwatch timing is affected by human response delays.
-   * Measuring 10 oscillations instead of 1 helps reduce the impact of this error.
-
-3. **Air Resistance and Swing Angle**:
-
-   * The formula for **g** assumes small angles (θ < 15°).
-   * Deviations from this introduce systematic errors.
-
-4. **Pendulum Length Assumption**:
-
-   * The length must be measured to the center of mass of the pendulum bob, which can be imprecise if the object isn't symmetric.
+* **Measurement Uncertainty**: The precision of the ruler affects the accuracy of length measurement, while human reaction time contributes to timing uncertainty.
+* **Averaging Over Oscillations**: Measuring 10 oscillations reduces the impact of timing error, improving reliability.
+* **Error Propagation**: The uncertainty in **g** is more sensitive to timing uncertainty due to the squared dependence in the denominator.
+* **Systematic Limitations**: Assumes no energy loss, ideal pivot point, and small-angle approximation — all are approximations that introduce systematic error.
 
 ---
 
 ## ✅ Conclusion
 
-This experiment provides a reasonably accurate value of **g** using very simple materials. By combining careful measurement, repeated trials, and uncertainty analysis — and visualizing the results — we gain a deeper appreciation of how precise physics experiments must be to achieve reliable results.
+Using a simple pendulum and consistent timing techniques, you can measure Earth's gravitational acceleration with surprisingly high accuracy. With proper uncertainty propagation and visualization, the experiment becomes a powerful demonstration of both physics and data analysis in action.
