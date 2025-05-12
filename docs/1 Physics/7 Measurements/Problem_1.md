@@ -39,13 +39,21 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
 
 * Compute average time for 10 oscillations:
 
-  $\overline{T}_{10} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)}$  $\n$
+  <div align="center">
+  $\overline{T}_{10} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)}$
+  </div>
+
 * Standard deviation of the 10 values:
 
-  $$\sigma_T = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (T_{10}^{(i)} - \overline{T}_{10})^2}$$
+  <div align="center">
+  $\sigma_T = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (T_{10}^{(i)} - \overline{T}_{10})^2}$
+  </div>
+
 * Uncertainty in mean:
 
-  $$\Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}$$
+  <div align="center">
+  $\Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}$
+  </div>
 
 ### 4. Final Calculations
 
