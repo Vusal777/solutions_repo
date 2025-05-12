@@ -139,6 +139,10 @@ plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 plt.savefig("pendulum_experiment_visualization.png", dpi=300)
 plt.show()
 ```
+---
+
+![alt text](image.png)
+![alt text](image-1.png)
 
 ---
 
