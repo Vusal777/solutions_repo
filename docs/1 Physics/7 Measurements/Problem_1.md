@@ -42,12 +42,10 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
   $\overline{T}_{10} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)}$
 * Standard deviation of the 10 values:
 
-  $$ \sigma_T = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (T_{10}^{(i)} - \overline{T}_{10})^2} $$
+  $\sigma_T = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} (T_{10}^{(i)} - \overline{T}_{10})^2}$
 * Uncertainty in mean:
 
-  $$
-  \Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}
-  $$
+  $\Delta T_{10} = \frac{\sigma_T}{\sqrt{n}}$
 
 ### 4. Final Calculations
 
