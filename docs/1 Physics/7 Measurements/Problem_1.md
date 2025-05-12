@@ -12,7 +12,7 @@ This experiment uses a **simple pendulum** to estimate **g**, applying statistic
 
 ## 🛠 Materials
 
-* String (\~1.0–1.5 meters)
+* String $$(~1.0–1.5 meters)$$
 * Small dense weight (e.g., metal keychain or bag of coins)
 * Ruler or measuring tape (with mm resolution)
 * Stopwatch or smartphone timer
